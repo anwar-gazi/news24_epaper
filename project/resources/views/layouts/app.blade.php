@@ -70,13 +70,14 @@
         }
     </style>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
 
 </head>
 
 <body id="body">
 
-    <div class="main-container" style="margin-top: 5px;margin-bottom: 5px;border: 3px solid #e2dbdb;width: 1150px">
+    <div class="main-container"
+        style="margin-top: 5px;margin-bottom: 5px;border: 3px solid #e2dbdb;/** width: 1150px*/">
         <div class="header-div">
             <div class="header-div">
 
@@ -126,7 +127,7 @@
 
 
                 <div class="add text-center" style="background-color: #EEEEEE;margin: 10px;padding: 2px 2px 2px 2px">
-                    <a href="{{ url('/') }}"><img
+                    <a href="{{ url('/') }}"><img id="main_logo"
                             src="{{ asset('admin/assets/images/logo/') }}/<?php echo $epaper_het->logo; ?>"
                             style="width: 300px"></a>
 
@@ -150,6 +151,7 @@
                             @endif
                         </p>
                     @endif
+                    <canvas id="printable" style="display: none;"></canvas>
                 </div>
             </div>
 
@@ -161,12 +163,10 @@
                 </div>
             @endif
 
-            <div class="row-div" style="overflow: hidden;">
-
-
+            <div class="row-div clearfix_z flex-container" style="overflow: visible; overflow-x: auto">
 
                 <!-- left paper div -->
-                <div class="row-div-left" style="padding-left: 10px;width: 170px;margin-left: 0px;">
+                <div class="row-div-left_z float-div_z" style="padding-left: 10px;width: 170px;margin-left: 0px;">
                     @if (empty($page_name) && !empty($get_categories) && count($get_categories) > 0)
                         <p
                             style="text-align: center;background-color: #eeeeee;padding: 4px;border: 1px solid #D2D0CE;border-bottom: none;">
@@ -206,14 +206,15 @@
 
                 </div>
 
-
-
                 <!-- main paper div -->
-                <div id="content_div" class="row-div-left" style="padding-left: 10px;width: auto;margin-left: 10px;">
+                <div id="content_div" class="row-div-left_z float-div_z"
+                    style="padding-left: 10px;width: auto;margin-left: 10px;">
                     <div>
                         @yield('content')
                     </div>
                 </div>
+
+
 
                 <!-- search result not found messages -->
                 @if (Session::has('message_not_found'))
@@ -222,24 +223,25 @@
                 <!-- end search result not found messages -->
 
 
-                <div id="img"
-                    style="position: absolute; border: 1px solid #dee2e6!important; width: 400px; height: auto; z-index: 100; background-color: white; display: none; padding: 10px; padding-bottom: 50px;">
+                <div id="img" class="float-div_z fill-remaining "
+                    style="border: 1px solid #dee2e6!important; height: auto; background-color: white; padding: 10px; padding-bottom: 50px;">
 
                     <span class="close-button" onclick="closeDiv()"
-                        style="position: absolute; top: 5px; left: 5px; cursor:pointer; font-size: 16px; padding: 2px 5px; border: 1px solid gray; border-radius: 3px; background-color: white;">X</span>
+                        style="display: none;position: absolute; top: 5px; left: 5px; cursor:pointer; font-size: 16px; padding: 2px 5px; border: 1px solid gray; border-radius: 3px; background-color: white;">X</span>
 
-                    <div id="img1"
+                    <div id="img1" class=""
                         style="display: flex; justify-content: center; align-items: center; margin-top: 50px; ">
-                        <img class="img1" src="" />
+                        <canvas id="canvas_img1"></canvas>
                     </div>
                     <div id="img2"
                         style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
-                        <img class="img2" src="" />
+                        <canvas id="canvas_img2"></canvas>
                     </div>
                 </div>
 
+
                 <!-- right sidebar -->
-                <div class="row-div-right" style="padding-right: 10px;margin-right: 0px;width: 200px">
+                <div class="row-div-right" style="padding-right: 10px;margin-right: 0px;width: 200px; display: none;">
                     <div class="right-content"
                         style="margin-top: 0px;background-color: white;border: none;padding: 0px !important;overflow: hidden;">
 
@@ -462,7 +464,7 @@
                 }
             }
 
-            function modalOpen(image, image_location, related_item, image_width) {
+            function modalOpen2(image, image_location, related_item, image_width) {
                 console.log(image, image_location, related_item, image_width);
                 /*==modal width set==*/
                 var modal_width = image_width;
@@ -744,17 +746,25 @@
 
             function printPage(printPage) {
 
-                var newWinPage = window.open('', 'Print-Window');
+                const canvas = document.getElementById("printable");
 
-                newWinPage.document.open();
+                watermark("printable", printPage);
 
-                newWinPage.document.write('<html><body onload="window.print()">' + '<center>' + '<img src=' + printPage +
-                    ' />' + '</center></body></html>');
+                if (canvas.toDataURL()) {
+                    var newWinPage = window.open('', 'Print-Window');
 
-                newWinPage.document.close();
-                setTimeout(function() {
-                    newWinPage.close();
-                }, 10);
+                    newWinPage.document.open();
+
+                    newWinPage.document.write('<html><body onload="window.print()">' + '<center>' + '<img src=' + canvas.toDataURL() +
+                        ' />' + '</center></body></html>');
+
+                    newWinPage.document.close();
+                    setTimeout(function() {
+                        newWinPage.close();
+                    }, 10);
+                } else {
+					console.error("canvas not ready");
+				}
             }
         </script>
 

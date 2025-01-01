@@ -154,7 +154,7 @@
 
 
     <!-- The Modal -->
-    <div id="newsPopup" class="modal">
+    <div id="newsPopup" class="modal hidden">
         <div class="modal-content customized_content loading_img" id="modal-content">
             <div class="modal-head">
                 <table width="100%" class="modal_table">
