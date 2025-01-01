@@ -72,7 +72,7 @@
 
 </head>
 
-<body id="body">
+<body id="body" class="">
 
     <div class="main-container" style="margin-top: 5px;margin-bottom: 5px;border: 3px solid #e2dbdb;width: 1150px">
         <div class="header-div">
