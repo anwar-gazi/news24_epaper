@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Console\Commands;
+
+use Exception;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
+
+class NewsCategoriesFetch extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'news:categories {url} {news-root}';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Fetch categories from the news api, and save the categories list in json file.';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        $apiUrl = $this->argument('url');
+        $catRootUrl = $this->argument('news-root');
+        $filepath = "data/news_categories.json";
+
+        try {
+            $context = stream_context_create([
+                'http' => ['method' => 'GET', 'header' => "Accept: application/json\r\n", 'timeout' => 100]
+            ]);
+            $json = @file_get_contents($apiUrl, false, $context);
+            if ($json === false) {
+                $error = error_get_last();
+                $this->error("Error fetching data: $error");
+                return 1;
+            }
+            $data = json_decode($json, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                $this->error("Invalid json received from the endpoint");
+                return 1;
+            }
+            $categories = array_map(function($cat) use($catRootUrl) {
+                return [
+                    'label' => $cat['menu_lavel'],
+                    'url' => rtrim($catRootUrl, '/') . '/' . $cat['slug']
+                ];
+            }, $data['data']);
+            Storage::put($filepath, json_encode($categories));
+            $this->info("Data received and saved into storage/app/" . $filepath);
+            return 1;
+        } catch (Exception $e) {
+            $this->error("Unexpected Error: " . $e->getMessage());
+            return 1;
+        }
+    }
+}

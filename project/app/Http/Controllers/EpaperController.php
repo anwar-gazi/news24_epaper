@@ -17,7 +17,6 @@ class EpaperController extends Controller
      */
     public function index()
     {
-
     	$page_info=\App\Epaper::GetPageInfo();
         $info=\App\Epaper::Getinformation();
 

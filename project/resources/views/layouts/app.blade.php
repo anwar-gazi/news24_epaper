@@ -34,7 +34,9 @@
     <!-- icon -->
     <link rel="icon" type="image/png" href="{{ asset('assets/images/32x32.png') }}" />
     <!-- font awesome css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" />
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" /> --}}
+    <link rel="stylesheet" media="all" href="https://epaper.kalbela.com/css/font-awesome.min.css?v=2.0.016">
+    <link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <!-- main css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css?v=1.2') }}" />
     <!-- fonts -->
@@ -59,7 +61,7 @@
     </style>
 
     <style type="text/css">
-        @media (min-width: 0px) and (max-width: 400px) {
+        @media (min-width: 0px) and (max-width: 768px) {
             .footerLogo {
                 display: none !important;
             }
@@ -71,39 +73,33 @@
 </head>
 
 <body id="body">
-
-    <div class="main-container"
-        style="margin-top: 5px;margin-bottom: 5px;border: 3px solid #e2dbdb;/** width: 1150px*/">
+    @php $epaper_het = \App\Epaper::Getinformation(); @endphp
+    <div class="main-container" style="margin-top: 10px;margin-bottom: 5px;">
         <div class="header-div">
-            <div class="header-div">
+            <header class="header-div" style="box-shadow: 0 3px 5px #eee">
 
                 <!-- header top -->
-                <div class="top-header"
-                    style="height: 33px;padding: 5px 10px;background-color: #EEEEEE;box-shadow: none;border-bottom: none;">
+                <div class="top-header container-fluid" style="padding: 5px 10px;border-bottom: none; box-shadow: none">
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tr>
                             <td>
-                                <div class="date text-left" style="margin-top: 2px">
-                                    @php $epaper_het = \App\Epaper::Getinformation(); @endphp
-                                    <p style="color: black;font-size: 17px">
-                                        অনলাইন ভার্সন দেখতে ক্লিক করুন <a href="<?php echo $epaper_het->online; ?>">অনলাইন ভার্সন</a>
-                                    </p>
-                                </div>
+                                <a href="{{ url('/') }}"><img id="main_logo" src="{{ asset('admin/assets/images/logo/') }}/<?php echo $epaper_het->logo; ?>" style="max-width: 300px"></a>
                             </td>
                             <td>
-                                <div class="social-icon" style="text-align: right;margin-top: 3px">
-                                    <ul class="list-unstyled" style="height: 32px;margin-left: 0;padding-left: 0">
-                                        <li class="fb btn"><a href="<?php echo $epaper_het->facebook; ?>" target="_blank"><i
-                                                    class="fa fa-facebook" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li class="twit btn"><a href="<?php echo $epaper_het->twitter; ?>" target="_blank"><i
-                                                    class="fa fa-twitter" aria-hidden="true"></i></a>
-                                        </li>
-                                        <li class="gplus btn"><a href="<?php echo $epaper_het->youtube; ?>" target="_blank"><i
-                                                    class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                                <nav>
+                                    <ul>
+                                        <li><a href="<?php echo $epaper_het->online; ?>" target="_blank"><img height="20" alt="site symbol logo" class="me-2" src="https://newsadmin.doptor.net/storage/application/1734591454favicon.jpg" style="vertical-align: sub"> অনলাইন</a></li>
+                                        <li><a href="#" target="_blank"><i class="fa-sharp fa-solid fa-table-list"></i> আজকের পত্রিকা</a></li>
+                                        <li><a href="#" target="_blank"><img width="16" src="https://kalbela.com/assets/verified_icon/archive.png" class="me-2" alt="archive"> আর্কাইভ</a></li>
+                                        <li class="dropdown"><a href="#"><i class="fa-solid fa-thumbs-up me-2"></i> সোশ্যাল মিডিয়া</a>
+                                            <ul class="dropdown-menu">
+                                                <li class="fb btn"><a href="<?php echo $epaper_het->facebook; ?>" target="_blank"><i class="fa-brands fa-square-facebook" aria-hidden="true"></i> <span>ফেসবুক</span></a></li>
+                                                <li class="gplus btn"><a href="<?php echo $epaper_het->youtube; ?>" target="_blank"><i class="fa-brands fa-youtube" aria-hidden="true"></i> <span>ইউটিউব</span></a></li>
+                                                <li class="twit btn"><a href="{{ $epaper_het->twitter ? $epaper_het->twitter : "#" }}" target="_blank"><i class="fa-brands fa-twitter" aria-hidden="true"></i> <span>টুইটার</span></a></li>
+                                            </ul>
                                         </li>
                                     </ul>
-                                </div>
+                                </nav>
                             </td>
                         </tr>
                     </table>
@@ -114,31 +110,29 @@
                 <!-- epaper_header_top_ad -->
                 @php $epaper_header_top_ad = \App\Epaper::GetAdvertisement('epaper_header_top'); @endphp
                 @if (!empty($epaper_header_top_ad) && !empty($epaper_header_top_ad->ad_code) && $epaper_header_top_ad->ad_status == '1')
-                    <div class="add text-center"
-                        style="background-color: #EEEEEE;margin: 20px;padding: 15px 10px 15px 10px">
+                    <div class="add text-center" style="margin: 20px;padding: 15px 10px 15px 10px">
                         <?php echo $epaper_header_top_ad->ad_code; ?>
                     </div>
                 @endif
                 <!-- end epaper_header_top_ad -->
 
 
-                <div class="add text-center" style="background-color: #EEEEEE;margin: 10px;padding: 2px 2px 2px 2px">
-                    <a href="{{ url('/') }}"><img id="main_logo"
-                            src="{{ asset('admin/assets/images/logo/') }}/<?php echo $epaper_het->logo; ?>"
-                            style="width: 300px"></a>
-
+                <div class="add text-center categories-nav" style="margin: 10px 0;padding: 20px 0; border-top: 1px solid #ccc;">
+                    <nav>
+                        <ul>
+                            <li><a href="{{ url('/') }}" aria-label="Latest News"><i class="fa-solid fa-house"></i></a></li>
+                            @foreach($categories as $cat)
+                                <li><a href="{{ $cat['url'] }}" title="{{ $cat['label'] }}">{{ $cat['label'] }}</a></li>
+                            @endforeach
+                        </ul>
+                    </nav>
                     @if (!empty($date))
-                        <p>
-                            @php $date_show = \App\Epaper::GetBanglaDate($date); @endphp
-                        <p style="font-size: 18px;margin-bottom: 0px;line-height: 21px;color: #BB1919;padding-top: 3px">
-                            {{ isset($date_show) ? $date_show : '' }}</p>
-                        <input type="hidden" id="bangla_date" name="bangla_date"
-                            value="{{ isset($date_show) ? $date_show : '' }}"></p>
+                        @php $date_show = \App\Epaper::GetBanglaDate($date); @endphp
+                        <input type="hidden" id="bangla_date" name="bangla_date" value="{{ isset($date_show) ? $date_show : '' }}">
 
-                        <p style="margin-top: 10px">
+                        <p class="hidden" style="margin-top: 10px">
                             @if (!empty($date))
-                                <a href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img
-                                        src="{{ asset('assets/images/front/all1.png') }}"></a>
+                                <a href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}"></a>
                             @endif
 
                             @if (!empty($home_page) && !empty($date))
@@ -151,156 +145,162 @@
                         </p>
                     @endif
                 </div>
-            </div>
+            </header>
 
-            @php $epaper_header_top_ad = \App\Epaper::GetAdvertisement('modal_top'); @endphp
-            @if (!empty($epaper_header_top_ad) && !empty($epaper_header_top_ad->ad_code) && $epaper_header_top_ad->ad_status == '1')
-                <div class="add text-center"
-                    style="background-color: #EEEEEE;margin: 20px;padding: 15px 10px 15px 10px">
-                    <?php echo $epaper_header_top_ad->ad_code; ?>
-                </div>
-            @endif
+            <header class="sticky">
 
-            <div class="row-div clearfix_z flex-container" style="overflow: visible; overflow-x: auto">
+            </header>
 
-                <!-- left paper div -->
-                <div class="row-div-left_z float-div_z" style="padding-left: 10px;width: 170px;margin-left: 0px;">
-                    @if (empty($page_name) && !empty($get_categories) && count($get_categories) > 0)
-                        <p
-                            style="text-align: center;background-color: #eeeeee;padding: 4px;border: 1px solid #D2D0CE;border-bottom: none;">
-                            <img src="{{ asset('assets/images/front/all1.png') }}">
-                        </p>
-                        <div style="border: 1px solid #D2D0CE;width: 168px;height: 500px;overflow-y: scroll;">
-                            <ul style="list-style: unset;padding: 0px;margin: 0px;">
-                                @foreach ($get_categories as $key => $page)
-                                    <li style="padding: 10px">
-                                        <a style="text-decoration: none;"
-                                            href="{{ url('/' . $page_edition . '/' . $date . '/' . $page->page_number) }}"><img
-                                                src="{{ asset('uploads/epaper/' . date('Y', strtotime($page->publish_date)) . '/' . date('m', strtotime($page->publish_date)) . '/' . date('d', strtotime($page->publish_date)) . '/thumb/' . $page->image) }}"
-                                                style="width: 100%">
-                                            <p
-                                                style="margin-bottom: 0px;padding: 3px;background-color: #ebe5de;text-align: center;color: black;border-bottom: 2px solid #939993">
-                                                {{ $page->name }}</p>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <!-- ad code -->
-                    @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_3'); @endphp
-                    @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
-                        <div class="add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
-                            <?php echo $sidebar_ad_4->ad_code; ?>
-                        </div>
-                    @endif
-                    @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_4'); @endphp
-                    @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
-                        <div class="add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
-                            <?php echo $sidebar_ad_4->ad_code; ?>
-                        </div>
-                    @endif
-
-                </div>
-
-                <!-- main paper div -->
-                <div id="content_div" class="row-div-left_z float-div_z"
-                    style="padding-left: 10px;width: auto;margin-left: 10px;">
-                    <div>
-                        @yield('content')
+            <main>
+                @php $epaper_header_top_ad = \App\Epaper::GetAdvertisement('modal_top'); @endphp
+                @if (!empty($epaper_header_top_ad) && !empty($epaper_header_top_ad->ad_code) && $epaper_header_top_ad->ad_status == '1')
+                    <div class="add text-center"
+                        style="margin-bottom: 20px;padding: 15px 10px 15px 10px">
+                        <?php echo $epaper_header_top_ad->ad_code; ?>
                     </div>
-                </div>
-
-
-
-                <!-- search result not found messages -->
-                @if (Session::has('message_not_found'))
-                    <span id="message_not_found"></span>
                 @endif
-                <!-- end search result not found messages -->
 
+                <div class="row-div clearfix_z flex-container main-view" style="overflow: visible; overflow-x: auto">
 
-                <div id="img" class="float-div_z fill-remaining "
-                    style="border: 1px solid #dee2e6!important; height: auto; background-color: white; padding: 10px; padding-bottom: 50px;">
-
-                    <span class="close-button" onclick="closeDiv()"
-                        style="display: none;position: absolute; top: 5px; left: 5px; cursor:pointer; font-size: 16px; padding: 2px 5px; border: 1px solid gray; border-radius: 3px; background-color: white;">X</span>
-
-                    <div id="img1" class=""
-                        style="display: flex; justify-content: center; align-items: center; margin-top: 50px; ">
-                        <canvas id="canvas_img1"></canvas>
-                    </div>
-                    <div id="img2"
-                        style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
-                        <canvas id="canvas_img2"></canvas>
-                    </div>
-                </div>
-
-
-                <!-- right sidebar -->
-                <div class="row-div-right" style="padding-right: 10px;margin-right: 0px;width: 200px; display: none;">
-                    <div class="right-content"
-                        style="margin-top: 0px;background-color: white;border: none;padding: 0px !important;overflow: hidden;">
-
-                        <!-- datepicker -->
-                        <p
-                            style="background-color: #EEEEEE;color: black;padding: 6px;text-align: center;width: auto;font-size: 18px;margin-bottom: 0px;border: 1px solid #c5c5c5;border-bottom: none;">
-                            পুরোনো সংখ্যা</p>
-                        <div id="Datepicker1"></div>
-
-                        <!-- categories -->
-                        @if (!empty($get_categories) && count($get_categories) > 0)
-                            <div class="add text-center" style="margin-top: 10px">
-                                <p
-                                    style="background-color: #EEEEEE;color: black;padding: 6px;text-align: center;width: auto;font-size: 18px;margin-bottom: 0px;border: 1px solid #c5c5c5;border-bottom: none;">
-                                    আজকের পত্রিকা</p>
-                                <div style="border: 1px solid #c5c5c5;">
-                                    <ul style="list-style: none;padding: 0px;margin: 0px;text-align: left;">
-                                        @foreach ($get_categories as $key => $category)
-                                            @if (!empty($category->category_id))
-                                                <li
-                                                    style="border-bottom: 1px solid #c5c5c5;padding: 8px 10px 8px 10px">
-                                                    <a style="font-size: 18px;color: black;text-decoration: none;"
-                                                        href="{{ url('/nogor-edition/' . $category->publish_date . '/' . $category->page_number) }}">
-                                                        &#8594; {{ $category->name }}</a>
-                                                </li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                </div>
+                    <!-- left paper div -->
+                    <div class="row-div-left_z float-div_z" style="padding-left: 10px;width: 170px;margin-left: 0px;">
+                        @if (empty($page_name) && !empty($get_categories) && count($get_categories) > 0)
+                            <p
+                                style="text-align: center;background-color: #eeeeee;padding: 4px;border: 1px solid #D2D0CE;border-bottom: none;">
+                                <img src="{{ asset('assets/images/front/all1.png') }}">
+                            </p>
+                            <div style="border: 1px solid #D2D0CE;width: 168px;height: 500px;overflow-y: scroll;">
+                                <ul style="list-style: unset;padding: 0px;margin: 0px;">
+                                    @foreach ($get_categories as $key => $page)
+                                        <li style="padding: 10px">
+                                            <a style="text-decoration: none;"
+                                                href="{{ url('/' . $page_edition . '/' . $date . '/' . $page->page_number) }}"><img
+                                                    src="{{ asset('uploads/epaper/' . date('Y', strtotime($page->publish_date)) . '/' . date('m', strtotime($page->publish_date)) . '/' . date('d', strtotime($page->publish_date)) . '/thumb/' . $page->image) }}"
+                                                    style="width: 100%">
+                                                <p
+                                                    style="margin-bottom: 0px;padding: 3px;background-color: #ebe5de;text-align: center;color: black;border-bottom: 2px solid #939993">
+                                                    {{ $page->name }}</p>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         @endif
 
-                        <!-- sidebar ad 4 -->
-                        @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_1'); @endphp
-                        @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
-                            <div class="add text-center"
-                                style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
-                                <?php echo $sidebar_ad_4->ad_code; ?>
-                            </div>
-                        @endif
-                        @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_2'); @endphp
-                        @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
-                            <div class="add text-center"
-                                style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
-                                <?php echo $sidebar_ad_4->ad_code; ?>
-                            </div>
-                        @endif
+                        <!-- ad code -->
                         @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_3'); @endphp
-
-
+                        @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
+                            <div class="add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
+                                <?php echo $sidebar_ad_4->ad_code; ?>
+                            </div>
+                        @endif
+                        @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_4'); @endphp
+                        @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
+                            <div class="add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
+                                <?php echo $sidebar_ad_4->ad_code; ?>
+                            </div>
+                        @endif
 
                     </div>
-                </div>
 
-            </div>
+                    <!-- main paper div -->
+                    <div id="content_div" class="row-div-left_z float-div_z"
+                        style="padding-left: 10px;width: auto;margin-left: 10px;">
+                        <div>
+                            @yield('content')
+                        </div>
+                    </div>
+
+
+
+                    <!-- search result not found messages -->
+                    @if (Session::has('message_not_found'))
+                        <span id="message_not_found"></span>
+                    @endif
+                    <!-- end search result not found messages -->
+
+
+                    <div id="img" class="float-div_z fill-remaining "
+                        style="border: 1px solid #dee2e6!important; height: auto; background-color: white; padding: 10px; padding-bottom: 50px;">
+
+                        <span class="close-button" onclick="closeDiv()"
+                            style="display: none;position: absolute; top: 5px; left: 5px; cursor:pointer; font-size: 16px; padding: 2px 5px; border: 1px solid gray; border-radius: 3px; background-color: white;">X</span>
+
+                        <div id="img1" class=""
+                            style="display: flex; justify-content: center; align-items: center; margin-top: 50px; ">
+                            <canvas id="canvas_img1"></canvas>
+                        </div>
+                        <div id="img2"
+                            style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+                            <canvas id="canvas_img2"></canvas>
+                        </div>
+                    </div>
+
+
+                    <!-- right sidebar -->
+                    <div class="row-div-right" style="padding-right: 10px;margin-right: 0px;width: 200px; display: none;">
+                        <div class="right-content"
+                            style="margin-top: 0px;background-color: white;border: none;padding: 0px !important;overflow: hidden;">
+
+                            <!-- datepicker -->
+                            <p
+                                style="background-color: #EEEEEE;color: black;padding: 6px;text-align: center;width: auto;font-size: 18px;margin-bottom: 0px;border: 1px solid #c5c5c5;border-bottom: none;">
+                                পুরোনো সংখ্যা</p>
+                            <div id="Datepicker1"></div>
+
+                            <!-- categories -->
+                            @if (!empty($get_categories) && count($get_categories) > 0)
+                                <div class="add text-center" style="margin-top: 10px">
+                                    <p
+                                        style="background-color: #EEEEEE;color: black;padding: 6px;text-align: center;width: auto;font-size: 18px;margin-bottom: 0px;border: 1px solid #c5c5c5;border-bottom: none;">
+                                        আজকের পত্রিকা</p>
+                                    <div style="border: 1px solid #c5c5c5;">
+                                        <ul style="list-style: none;padding: 0px;margin: 0px;text-align: left;">
+                                            @foreach ($get_categories as $key => $category)
+                                                @if (!empty($category->category_id))
+                                                    <li
+                                                        style="border-bottom: 1px solid #c5c5c5;padding: 8px 10px 8px 10px">
+                                                        <a style="font-size: 18px;color: black;text-decoration: none;"
+                                                            href="{{ url('/nogor-edition/' . $category->publish_date . '/' . $category->page_number) }}">
+                                                            &#8594; {{ $category->name }}</a>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <!-- sidebar ad 4 -->
+                            @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_1'); @endphp
+                            @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
+                                <div class="add text-center"
+                                    style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
+                                    <?php echo $sidebar_ad_4->ad_code; ?>
+                                </div>
+                            @endif
+                            @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_2'); @endphp
+                            @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
+                                <div class="add text-center"
+                                    style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
+                                    <?php echo $sidebar_ad_4->ad_code; ?>
+                                </div>
+                            @endif
+                            @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_3'); @endphp
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </main>
 
             <!-- epaper_header_bottom_ad -->
             @php $epaper_header_top_ad = \App\Epaper::GetAdvertisement('modal_bottom'); @endphp
             @if (!empty($epaper_header_top_ad) && !empty($epaper_header_top_ad->ad_code) && $epaper_header_top_ad->ad_status == '1')
                 <div class="add text-center"
-                    style="background-color: #EEEEEE;margin: 20px;padding: 15px 10px 15px 10px">
+                    style="margin: 20px 0;padding: 15px 10px 15px 10px">
                     <?php echo $epaper_header_top_ad->ad_code; ?>
                 </div>
             @endif
@@ -310,14 +310,14 @@
                     !empty($epaper_header_bottom_ad->ad_code) &&
                     $epaper_header_bottom_ad->ad_status == '1')
                 <div class="add text-center"
-                    style="background-color: #EEEEEE;margin: 20px;padding: 15px 10px 15px 10px">
+                    style="margin: 20px 0;padding: 15px 10px 15px 10px">
                     <?php echo $epaper_header_bottom_ad->ad_code; ?>
                 </div>
             @endif
             <!-- end epaper_header_bottom_ad -->
 
 
-            <div class="footer" style="margin-top: 5px">
+            <div class="footer container-fluid" style="margin-top: 5px">
                 <div class="footer-contend" style="padding: 3px; padding-bottom: 10px">
 
                     <div style="width: 100%;" class="footer_texts">

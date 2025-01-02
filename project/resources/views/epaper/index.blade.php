@@ -82,7 +82,8 @@
         <table style="width: 100%;background-color: #d2d0ce;margin: 0px 0px 10px 0px">
             <tr>
                 <td>
-                    <center>
+                    <center style="position: relative">
+                        <a href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}" style="position: absolute; left: 0"></a>
                         <div class="pagination" style="margin: 0px;padding: 5px">
                             <a style="margin-left: 0px;" href="#">&laquo;</a>
                             @for ($i = 1; $i <= count($pagination_pages); $i++)
@@ -90,6 +91,13 @@
                             @endfor
                             <a href="{{ url('/nogor-edition/' . $date . '/1') }}">&raquo;</a>
                         </div>
+                        @if (!empty($home_page))
+                            @php
+                                $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
+                            @endphp
+                            <a href="javascript::void(0)" onclick='printPage("{{ $srcImage }}");' ><img src="{{ asset('assets/images/front/print.png') }}" style="position: absolute; right: 0"></a>
+                            <canvas id="printable" style="display: none;" data-srcImage="{{ $srcImage }}"></canvas>
+                        @endif
                     </center>
                 </td>
             </tr>
@@ -99,7 +107,7 @@
 
     <div class="left-content">
 
-        <div class="main-img-div" style="padding-left: 10px;padding-right: 10px;padding-bottom: 10px">
+        <div id="main-img-div" class="main-img-div" style="padding-left: 10px;padding-right: 10px;padding-bottom: 10px">
             @if (!empty($home_page) && !empty($date))
                 <img src="{{ asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image) }}"
                     usemap="#enewspaper" class="map" />

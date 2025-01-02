@@ -149,6 +149,10 @@ jQuery(document).ready(function () {
 		watermark("printable", printPage, $('#main_logo').attr("src"), (canvas) => imagePrinWindow(canvas.toDataURL()));
 	}
 
+	function populateStickyHeader() {
+		const nav = $('div.categories-nav nav').prop('outerHTML');
+	}
+
 	window.watermark = watermark;
 	window.modalOpen = modalOpen;
 	window.printPage = printPage;
