@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('css')
 <style type="text/css">
     li.current_edition:hover {
         background-color: inherit !important
@@ -70,6 +71,8 @@
         background-image: url({{ asset('assets/images/overlay.png') }});
     }
 </style>
+
+@endsection('css')
 
 @section('content')
 

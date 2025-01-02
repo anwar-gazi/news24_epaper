@@ -38,20 +38,20 @@ jQuery(document).ready(function () {
 	function loadImage(image_url) {
 		return new Promise((resolve, reject) => {
 			const img = new Image();
+			img.src = image_url;
 			img.onload = () => resolve(img);
 			img.onerror = reject;
-			img.src = image_url;
 		});
 	}
 
-	function watermark(canvasid, target_image_url, watermark_image_url=$('#main_logo').attr("src")) {
-		const canvas = document.getElementById(canvasid);
-		const ctx = canvas.getContext('2d');
-
+	function watermark(canvasid, target_image_url, watermark_image_url = $('#main_logo').attr("src"), after = (canvas) => { }) {
 		Promise.all([
 			loadImage(target_image_url),
 			loadImage(watermark_image_url)
 		]).then(([mainImage, watermarkImage]) => {
+			const canvas = document.getElementById(canvasid);
+			const ctx = canvas.getContext('2d');
+
 			canvas.width = mainImage.naturalWidth;
 			canvas.height = mainImage.naturalHeight;
 
@@ -66,6 +66,8 @@ jQuery(document).ready(function () {
 			ctx.globalAlpha = 0.2; // Set watermark opacity
 			ctx.drawImage(watermarkImage, x, y, watermarkWidth, watermarkHeight);
 			ctx.globalAlpha = 1.0; // Reset opacity
+
+			after(canvas);
 		}).catch(error => {
 			console.error('Error applying watermark');
 		});
@@ -73,7 +75,7 @@ jQuery(document).ready(function () {
 
 
 	function modalOpen(image, image_location, related_item, image_width) {
-		console.log(image, image_location, related_item, image_width);
+		// console.log(image, image_location, related_item, image_width);
 		/*==modal width set==*/
 		var modal_width = image_width;
 		if (modal_width > 1050) {
@@ -129,10 +131,27 @@ jQuery(document).ready(function () {
 
 	}
 
+	function imagePrinWindow(src) {
+		// const canvas = document.getElementById("printable");
+		var newWinPage = window.open('print', 'Print-Window');
+
+		newWinPage.document.open();
+
+		newWinPage.document.write('<html><title>niropekkho</title><body onload="window.print()">' + '<center>' + '<img src=' + src + ' />' + '</center></body></html>');
+
+		newWinPage.document.close();
+		setTimeout(function () {
+			newWinPage.close();
+		}, 10);
+	}
+
+	function printPage(printPage) {
+		watermark("printable", printPage, $('#main_logo').attr("src"), (canvas) => imagePrinWindow(canvas.toDataURL()));
+	}
+
 	window.watermark = watermark;
 	window.modalOpen = modalOpen;
-
-
+	window.printPage = printPage;
 });
 
 /*==============javascript=====================*/

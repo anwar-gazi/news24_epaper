@@ -1,7 +1,5 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     @php $epaper_het = \App\Epaper::Getinformation(); @endphp
@@ -38,9 +36,9 @@
     <!-- font awesome css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/font-awesome/css/font-awesome.min.css') }}" />
     <!-- main css -->
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css?v=1.2') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css?v=1.2') }}" />
     <!-- fonts -->
-    <link rel="stylesheet" href="{{ asset('assets/fonts/styles.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/fonts/stylesheet.css') }}" />
     <!-- jquery js -->
     <script src="{{ asset('assets/js/jquery-3.1.1.min.js') }}"></script>
     <!-- maplight js -->
@@ -50,8 +48,6 @@
             $('.map').maphilight();
         });
     </script>
-    <!-- main js -->
-    <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
     <!-- datepicker -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/jquery-ui/jquery-ui.css') }}">
     <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.js') }}"></script>
@@ -70,7 +66,7 @@
         }
     </style>
 
-    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    @yield('css')
 
 </head>
 
@@ -144,14 +140,16 @@
                                 <a href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img
                                         src="{{ asset('assets/images/front/all1.png') }}"></a>
                             @endif
+
                             @if (!empty($home_page) && !empty($date))
-                                <a href="javascript::void(0)"
-                                    onclick='printPage("{{ asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image) }}");'><img
-                                        src="{{ asset('assets/images/front/print.png') }}"></a>
+                                @php
+                                    $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
+                                @endphp
+                                <a href="javascript::void(0)" onclick='printPage("{{ $srcImage }}");' ><img src="{{ asset('assets/images/front/print.png') }}"></a>
+                                <canvas id="printable" style="display: none;" data-srcImage="{{ $srcImage }}"></canvas>
                             @endif
                         </p>
                     @endif
-                    <canvas id="printable" style="display: none;"></canvas>
                 </div>
             </div>
 
@@ -744,29 +742,10 @@
             });
 
 
-            function printPage(printPage) {
-
-                const canvas = document.getElementById("printable");
-
-                watermark("printable", printPage);
-
-                if (canvas.toDataURL()) {
-                    var newWinPage = window.open('', 'Print-Window');
-
-                    newWinPage.document.open();
-
-                    newWinPage.document.write('<html><body onload="window.print()">' + '<center>' + '<img src=' + canvas.toDataURL() +
-                        ' />' + '</center></body></html>');
-
-                    newWinPage.document.close();
-                    setTimeout(function() {
-                        newWinPage.close();
-                    }, 10);
-                } else {
-					console.error("canvas not ready");
-				}
-            }
+            
         </script>
+
+        <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
 
         <input type="hidden" class="site_url" value="{{ url('/') }}">
         <input type="hidden" class="site_url_name" value="{{ \Request::route()->getName() }}">
