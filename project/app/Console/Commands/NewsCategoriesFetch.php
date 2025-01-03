@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Console\Input\InputArgument;
 
 class NewsCategoriesFetch extends Command
 {
@@ -30,6 +31,14 @@ class NewsCategoriesFetch extends Command
     public function __construct()
     {
         parent::__construct();
+    }
+
+    protected function getArguments()
+    {
+        return [
+            ['url', InputArgument::REQUIRED, 'The URL to fetch the news categories from'],
+            ['news-root', InputArgument::REQUIRED, 'The news website root'],
+        ];
     }
 
     /**
@@ -58,7 +67,7 @@ class NewsCategoriesFetch extends Command
                 $this->error("Invalid json received from the endpoint");
                 return 1;
             }
-            $categories = array_map(function($cat) use($catRootUrl) {
+            $categories = array_map(function ($cat) use ($catRootUrl) {
                 return [
                     'label' => $cat['menu_lavel'],
                     'url' => rtrim($catRootUrl, '/') . '/' . $cat['slug']
