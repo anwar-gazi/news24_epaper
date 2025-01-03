@@ -53,6 +53,7 @@
     <!-- datepicker -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/jquery-ui/jquery-ui.css') }}">
     <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.js') }}"></script>
+    <script src="{{ asset('assets/js/moment-with-locales.min.js') }}"></script>
     <style type="text/css">
         .ui-datepicker-inline {
             width: auto !important;
@@ -73,22 +74,25 @@
 </head>
 
 <body id="body">
-    @php $epaper_het = \App\Epaper::Getinformation(); @endphp
+    @php 
+        $epaper_het = \App\Epaper::Getinformation(); 
+        $logoSrc = asset('admin/assets/images/logo/') . '/' . $epaper_het->logo;
+        $logoIconSrc = asset('admin/assets/images/ni.png');
+    @endphp
     <div class="main-container" style="margin-top: 10px;margin-bottom: 5px;">
         <div class="header-div">
-            <header class="header-div" style="box-shadow: 0 3px 5px #eee">
-
+            <header id="header_non-sticky" class="header-div non-sticky" style="box-shadow: 0 3px 5px #eee">
                 <!-- header top -->
                 <div class="top-header container-fluid" style="padding: 5px 10px;border-bottom: none; box-shadow: none">
                     <table width="100%" cellspacing="0" cellpadding="0" border="0">
                         <tr>
                             <td>
-                                <a href="{{ url('/') }}"><img id="main_logo" src="{{ asset('admin/assets/images/logo/') }}/<?php echo $epaper_het->logo; ?>" style="max-width: 300px"></a>
+                                <a href="{{ url('/') }}"><img id="main_logo" src="{{ $logoSrc }}" style="max-width: 300px"></a>
                             </td>
                             <td>
                                 <nav>
                                     <ul>
-                                        <li><a href="<?php echo $epaper_het->online; ?>" target="_blank"><img height="20" alt="site symbol logo" class="me-2" src="https://newsadmin.doptor.net/storage/application/1734591454favicon.jpg" style="vertical-align: sub"> অনলাইন</a></li>
+                                        <li><a href="<?php echo $epaper_het->online; ?>" target="_blank"><img height="20" alt="site symbol logo" class="me-2" src="{{ $logoIconSrc }}" style="vertical-align: sub"> অনলাইন</a></li>
                                         <li><a href="#" target="_blank"><i class="fa-sharp fa-solid fa-table-list"></i> আজকের পত্রিকা</a></li>
                                         <li><a href="#" target="_blank"><img width="16" src="https://kalbela.com/assets/verified_icon/archive.png" class="me-2" alt="archive"> আর্কাইভ</a></li>
                                         <li class="dropdown"><a href="#"><i class="fa-solid fa-thumbs-up me-2"></i> সোশ্যাল মিডিয়া</a>
@@ -147,8 +151,19 @@
                 </div>
             </header>
 
-            <header class="sticky">
-
+            <header id="header_sticky" class="sticky">
+                <div class="container-fluid">
+                    <div class="d-flex position-relative">
+                        <div class="flex-fill py-2">
+                            <a class="logo w-100" href="/">
+                                <img class="img-fluid logo" src="{{ $logoIconSrc }}"> | <span id="today_date"></span></a>
+                        </div>
+                        <div class="flex-fill pt-2 sticky-categories-nav">
+                            <nav>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
             </header>
 
             <main>
@@ -220,25 +235,25 @@
                     <!-- end search result not found messages -->
 
 
-                    <div id="img" class="float-div_z fill-remaining "
-                        style="border: 1px solid #dee2e6!important; height: auto; background-color: white; padding: 10px; padding-bottom: 50px;">
+                    <div id="img" class="float-div_z fill-remaining">
 
-                        <span class="close-button" onclick="closeDiv()"
-                            style="display: none;position: absolute; top: 5px; left: 5px; cursor:pointer; font-size: 16px; padding: 2px 5px; border: 1px solid gray; border-radius: 3px; background-color: white;">X</span>
+                        <div style="height: 47px;"></div>
 
-                        <div id="img1" class=""
-                            style="display: flex; justify-content: center; align-items: center; margin-top: 50px; ">
-                            <canvas id="canvas_img1"></canvas>
-                        </div>
-                        <div id="img2"
-                            style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
-                            <canvas id="canvas_img2"></canvas>
+                        <div style="border: 1px solid #dee2e6!important; height: auto; background-color: white; padding: 10px; padding-bottom: 50px;">
+                            <div id="img1" class=""
+                                style="display: flex; justify-content: center; align-items: center; margin-top: 50px; ">
+                                <canvas id="canvas_img1"></canvas>
+                            </div>
+                            <div id="img2"
+                                style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+                                <canvas id="canvas_img2"></canvas>
+                            </div>
                         </div>
                     </div>
 
 
                     <!-- right sidebar -->
-                    <div class="row-div-right" style="padding-right: 10px;margin-right: 0px;width: 200px; display: none;">
+                    <div class="row-div-right hidden" style="padding-right: 10px;margin-right: 0px;width: 200px; ">
                         <div class="right-content"
                             style="margin-top: 0px;background-color: white;border: none;padding: 0px !important;overflow: hidden;">
 
@@ -246,7 +261,7 @@
                             <p
                                 style="background-color: #EEEEEE;color: black;padding: 6px;text-align: center;width: auto;font-size: 18px;margin-bottom: 0px;border: 1px solid #c5c5c5;border-bottom: none;">
                                 পুরোনো সংখ্যা</p>
-                            <div id="Datepicker1"></div>
+                            <div id="Datepicker1_z"></div>
 
                             <!-- categories -->
                             @if (!empty($get_categories) && count($get_categories) > 0)

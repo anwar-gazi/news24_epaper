@@ -46,11 +46,11 @@
     }
 
     .pagination a {
-        color: white;
+        /* color: white; */
         float: left;
         padding: 2px 7px;
         text-decoration: none;
-        background-color: #846d6d;
+        /* background-color: #846d6d; */
         border: 1px solid #ddd;
         margin: 0 4px;
     }
@@ -79,12 +79,16 @@
     @if (!empty($date))
         @php $date_show=\App\Epaper::GetBanglaDate($date); @endphp
 
-        <table style="width: 100%;background-color: #d2d0ce;margin: 0px 0px 10px 0px">
+        <table style="width: 100%;margin: 0px 0px 10px 0px">
             <tr>
                 <td>
-                    <center style="position: relative">
-                        <a href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}" style="position: absolute; left: 0"></a>
-                        <div class="pagination" style="margin: 0px;padding: 5px">
+                    <center class="relative">
+                        <a class="hidden" href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}" style="position: absolute; left: 0"></a>
+                        <div tabindex="0" class="archive-cal-level text-center relative float-left" onclick="show('Datepicker1')" onfocusout="hide('Datepicker1')">
+                            <div class="inline"><i class="fa fa-calendar"></i> <span>{{ $date }}</span></div>
+                            <div id="Datepicker1" class="absolute z-1 hidden"></div>
+                        </div>
+                        <div class="pagination" style="margin: 0px;padding: 0px">
                             <a style="margin-left: 0px;" href="#">&laquo;</a>
                             @for ($i = 1; $i <= count($pagination_pages); $i++)
                                 <a href="{{ url('/nogor-edition/' . $date . '/' . $i) }}">{{ $i }}</a>

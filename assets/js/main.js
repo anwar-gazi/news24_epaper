@@ -149,13 +149,42 @@ jQuery(document).ready(function () {
 		watermark("printable", printPage, $('#main_logo').attr("src"), (canvas) => imagePrinWindow(canvas.toDataURL()));
 	}
 
-	function populateStickyHeader() {
-		const nav = $('div.categories-nav nav').prop('outerHTML');
+	function stickyHeader() {
+		moment.locale('bn');
+        const timenow = moment().format('DD MMMM YYYY');
+		$('#today_date').text(timenow);
+		$('.sticky-categories-nav').html($('div.categories-nav nav').prop('outerHTML'));
+
+		const nav = document.getElementById('header_non-sticky');
+		const hiddenDiv = document.getElementById('header_sticky');
+
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (!entry.isIntersecting) {
+					hiddenDiv.style.display = 'block';
+				} else {
+					hiddenDiv.style.display = 'none';
+				}
+			},
+			{ threshold: 0 }
+		);
+
+		observer.observe(nav);
+	}
+	stickyHeader();
+
+	function show(id) {
+		$('#'+id).show();
+	}
+	function hide(id) {
+		$('#'+id).hide();
 	}
 
 	window.watermark = watermark;
 	window.modalOpen = modalOpen;
 	window.printPage = printPage;
+	window.show = show;
+	window.hide = hide;
 });
 
 /*==============javascript=====================*/
