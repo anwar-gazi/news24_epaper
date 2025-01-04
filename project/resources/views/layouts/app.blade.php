@@ -82,33 +82,63 @@
     <div class="main-container" style="margin-top: 10px;margin-bottom: 5px;">
         <div class="header-div">
             <header id="header_non-sticky" class="header-div non-sticky" style="box-shadow: 0 3px 5px #eee">
-                <!-- header top -->
-                <div class="top-header container-fluid" style="padding: 5px 10px;border-bottom: none; box-shadow: none">
-                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
-                        <tr>
-                            <td>
-                                <a href="{{ url('/') }}"><img id="main_logo" src="{{ $logoSrc }}" style="max-width: 300px"></a>
-                            </td>
-                            <td>
-                                <nav>
-                                    <ul>
-                                        <li><a href="<?php echo $epaper_het->online; ?>" target="_blank"><img height="20" alt="site symbol logo" class="me-2" src="{{ $logoIconSrc }}" style="vertical-align: sub"> অনলাইন</a></li>
-                                        <li><a href="#" target="_blank"><i class="fa-sharp fa-solid fa-table-list"></i> আজকের পত্রিকা</a></li>
-                                        <li><a href="#" target="_blank"><img width="16" src="https://kalbela.com/assets/verified_icon/archive.png" class="me-2" alt="archive"> আর্কাইভ</a></li>
-                                        <li class="dropdown"><a href="#"><i class="fa-solid fa-thumbs-up me-2"></i> সোশ্যাল মিডিয়া</a>
-                                            <ul class="dropdown-menu">
-                                                <li class="fb btn"><a href="<?php echo $epaper_het->facebook; ?>" target="_blank"><i class="fa-brands fa-square-facebook" aria-hidden="true"></i> <span>ফেসবুক</span></a></li>
-                                                <li class="gplus btn"><a href="<?php echo $epaper_het->youtube; ?>" target="_blank"><i class="fa-brands fa-youtube" aria-hidden="true"></i> <span>ইউটিউব</span></a></li>
-                                                <li class="twit btn"><a href="{{ $epaper_het->twitter ? $epaper_het->twitter : "#" }}" target="_blank"><i class="fa-brands fa-twitter" aria-hidden="true"></i> <span>টুইটার</span></a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <!-- header top end -->
+                <div class="container-fluid d-flex justify-content-between align-items-center py-2">
+                    <a href="{{ url('/') }}" class="d-flex align-items-center">
+                      <img id="main_logo" src="{{ $logoSrc }}" alt="Logo" style="max-width: 300px">
+                    </a>
+                  
+                    <nav class="ms-auto d-none d-lg-flex">  <ul class="nav list-unstyled mb-0">
+                        <li class="nav-item">
+                          <a href="<?php echo $epaper_het->online; ?>" target="_blank" class="nav-link">
+                            <img height="20" alt="Site symbol logo" class="me-2" src="{{ $logoIconSrc }}" style="vertical-align: sub"> অনলাইন
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" target="_blank" class="nav-link">
+                            <i class="fa-sharp fa-solid fa-table-list"></i> আজকের পত্রিকা
+                          </a>
+                        </li>
+                        <li class="nav-item">
+                          <a href="#" target="_blank" class="nav-link">
+                            <img width="16" src="https://kalbela.com/assets/verified_icon/archive.png" class="me-2" alt="archive"> আর্কাইভ
+                          </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="fa-solid fa-thumbs-up me-2"></i> সোশ্যাল মিডিয়া
+                          </a>
+                          <ul class="dropdown-menu megamenu shadow"> <li>
+                              <a href="<?php echo $epaper_het->facebook; ?>" target="_blank" class="d-flex align-items-center">
+                                <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                                <span class="ms-2">ফেসবুক</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="<?php echo $epaper_het->youtube; ?>" target="_blank" class="d-flex align-items-center">
+                                <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+                                <span class="ms-2">ইউটিউব</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="{{ $epaper_het->twitter ? $epaper_het->twitter : "#" }}" target="_blank" class="d-flex align-items-center">
+                                <i class="fa-brands fa-twitter" aria-hidden="true"></i>
+                                <span class="ms-2">টুইটার</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </nav>
+                  
+                    <button class="btn btn-light d-lg-none hidden" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <i class="fa-solid fa-bars"></i>
+                    </button>
+                  </div>
+                  
+                  <div class="collapse" id="mobileNav">
+                    <nav class="nav flex-column px-3 py-2">
+                      </nav>
+                  </div>
 
 
                 <!-- epaper_header_top_ad -->
@@ -121,37 +151,39 @@
                 <!-- end epaper_header_top_ad -->
 
 
-                <div class="add text-center categories-nav" style="margin: 10px 0;padding: 20px 0; border-top: 1px solid #ccc;">
-                    <nav>
-                        <ul>
-                            <li><a href="{{ url('/') }}" aria-label="Latest News"><i class="fa-solid fa-house"></i></a></li>
-                            @foreach($categories as $cat)
-                                <li><a href="{{ $cat['url'] }}" title="{{ $cat['label'] }}">{{ $cat['label'] }}</a></li>
-                            @endforeach
-                        </ul>
-                    </nav>
-                    @if (!empty($date))
-                        @php $date_show = \App\Epaper::GetBanglaDate($date); @endphp
-                        <input type="hidden" id="bangla_date" name="bangla_date" value="{{ isset($date_show) ? $date_show : '' }}">
+                <div style="border-top: 1px solid #ccc;">
+                    <div class="add text-center categories-nav container-fluid scrollmenu" style="padding: 20px 0; ">
+                        <nav>
+                            <ul>
+                                <li><a href="{{ url('/') }}" aria-label="Latest News"><i class="fa-solid fa-house"></i></a></li>
+                                @foreach($categories as $cat)
+                                    <li><a href="{{ $cat['url'] }}" title="{{ $cat['label'] }}">{{ $cat['label'] }}</a></li>
+                                @endforeach
+                            </ul>
+                        </nav>
+                        @if (!empty($date))
+                            @php $date_show = \App\Epaper::GetBanglaDate($date); @endphp
+                            <input type="hidden" id="bangla_date" name="bangla_date" value="{{ isset($date_show) ? $date_show : '' }}">
 
-                        <p class="hidden" style="margin-top: 10px">
-                            @if (!empty($date))
-                                <a href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}"></a>
-                            @endif
+                            <p class="hidden" style="margin-top: 10px">
+                                @if (!empty($date))
+                                    <a href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}"></a>
+                                @endif
 
-                            @if (!empty($home_page) && !empty($date))
-                                @php
-                                    $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
-                                @endphp
-                                <a href="javascript::void(0)" onclick='printPage("{{ $srcImage }}");' ><img src="{{ asset('assets/images/front/print.png') }}"></a>
-                                <canvas id="printable" style="display: none;" data-srcImage="{{ $srcImage }}"></canvas>
-                            @endif
-                        </p>
-                    @endif
+                                @if (!empty($home_page) && !empty($date))
+                                    @php
+                                        $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
+                                    @endphp
+                                    <a href="javascript::void(0)" onclick='printPage("{{ $srcImage }}");' ><img src="{{ asset('assets/images/front/print.png') }}"></a>
+                                    <canvas id="printable" style="display: none;" data-srcImage="{{ $srcImage }}"></canvas>
+                                @endif
+                            </p>
+                        @endif
+                    </div>
                 </div>
             </header>
 
-            <header id="header_sticky" class="sticky">
+            <header id="header_sticky" class="sticky hidden d-lg-flex">
                 <div class="container-fluid">
                     <div class="d-flex position-relative">
                         <div class="flex-fill py-2">
@@ -169,23 +201,27 @@
             <main>
                 @php $epaper_header_top_ad = \App\Epaper::GetAdvertisement('modal_top'); @endphp
                 @if (!empty($epaper_header_top_ad) && !empty($epaper_header_top_ad->ad_code) && $epaper_header_top_ad->ad_status == '1')
-                    <div class="add text-center"
+                    <div class="add text-center hidden d-lg-block"
                         style="margin-bottom: 20px;padding: 15px 10px 15px 10px">
                         <?php echo $epaper_header_top_ad->ad_code; ?>
                     </div>
                 @endif
 
-                <div class="row-div clearfix_z flex-container main-view" style="overflow: visible; overflow-x: auto">
+                @php
+                    foreach ($get_categories as $key => $page) {
+                        $page->url = url('/' . $page_edition . '/' . $date . '/' . $page->page_number);
+                        $page->thumb = asset('uploads/epaper/' . date('Y', strtotime($page->publish_date)) . '/' . date('m', strtotime($page->publish_date)) . '/' . date('d', strtotime($page->publish_date)) . '/thumb/' . $page->image);
+                    }
+                @endphp
+
+                <div class="row-div flex-container container-fluid" style="overflow: visible; overflow-x: auto">
 
                     <!-- left paper div -->
-                    <div class="row-div-left_z float-div_z" style="padding-left: 10px;width: 170px;margin-left: 0px;">
+                    <div class="allPages_left">
                         @if (empty($page_name) && !empty($get_categories) && count($get_categories) > 0)
-                            <p
-                                style="text-align: center;background-color: #eeeeee;padding: 4px;border: 1px solid #D2D0CE;border-bottom: none;">
-                                <img src="{{ asset('assets/images/front/all1.png') }}">
-                            </p>
+                            <div class="all-thumb current">সকল পাতা</div>
                             <div style="border: 1px solid #D2D0CE;width: 168px;height: 500px;overflow-y: scroll;">
-                                <ul style="list-style: unset;padding: 0px;margin: 0px;">
+                                <ul id="sideLeft_pagesUl" style="list-style: unset;padding: 0px;margin: 0px;">
                                     @foreach ($get_categories as $key => $page)
                                         <li style="padding: 10px">
                                             <a style="text-decoration: none;"
@@ -205,13 +241,13 @@
                         <!-- ad code -->
                         @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_3'); @endphp
                         @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
-                            <div class="add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
+                            <div class="hidden d-lg-block add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
                                 <?php echo $sidebar_ad_4->ad_code; ?>
                             </div>
                         @endif
                         @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_4'); @endphp
                         @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
-                            <div class="add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
+                            <div class="hidden d-lg-block add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
                                 <?php echo $sidebar_ad_4->ad_code; ?>
                             </div>
                         @endif
@@ -219,10 +255,37 @@
                     </div>
 
                     <!-- main paper div -->
-                    <div id="content_div" class="row-div-left_z float-div_z"
-                        style="padding-left: 10px;width: auto;margin-left: 10px;">
+                    <div id="content_div" class="relative">
+                        <div id="content_topbar">
+                            <a class="hidden" href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}" style="position: absolute; left: 0"></a>
+                            <div tabindex="0" class="archive-cal-level text-center relative float-left" onclick="show('Datepicker1')" onfocusout="hide('Datepicker1')">
+                                <div class="inline"><i class="fa fa-calendar"></i> <span>{{ $date }}</span></div>
+                                <div id="Datepicker1" class="absolute z-1 hidden"></div>
+                            </div>
+                            <div class="pagination" style="margin: 0px;padding: 0px">
+                                <a style="margin-left: 0px;" href="#">&laquo;</a>
+                                @for ($i = 1; $i <= count($pagination_pages); $i++)
+                                    <a href="{{ url('/nogor-edition/' . $date . '/' . $i) }}">{{ $i }}</a>
+                                @endfor
+                                <a href="{{ url('/nogor-edition/' . $date . '/1') }}">&raquo;</a>
+                            </div>
+                            @if (!empty($home_page))
+                                @php
+                                    $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
+                                @endphp
+                                <button onclick='printPage("{{ $srcImage }}");' style="position: absolute; right: 0">
+                                    <i class="fa fa-print"></i></button>
+                                <canvas id="printable" style="display: none;" data-srcImage="{{ $srcImage }}"></canvas>
+                            @endif
+                        </div>
+
                         <div>
                             @yield('content')
+                        </div>
+
+                        <div class="epaper-page-bar1 mt-4">
+                            <a href="{{ url('/all/pages/nogor-edition/' . $date) }}" class="e-previous e-previous-page e-but mr-3 e-previous-clse"><i class="fa fa-angle-left d-lg-block"></i></a>
+                            <a href="{{ url('/nogor-edition/' . $date . '/2') }}" class="e-next e-but"><i class="fa fa-angle-right d-lg-block"></i></a>
                         </div>
                     </div>
 
@@ -235,18 +298,23 @@
                     <!-- end search result not found messages -->
 
 
-                    <div id="img" class="float-div_z fill-remaining">
-
-                        <div style="height: 47px;"></div>
-
-                        <div style="border: 1px solid #dee2e6!important; height: auto; background-color: white; padding: 10px; padding-bottom: 50px;">
-                            <div id="img1" class=""
-                                style="display: flex; justify-content: center; align-items: center; margin-top: 50px; ">
-                                <canvas id="canvas_img1"></canvas>
+                    <div id="img" class="fill-remaining hidden d-lg-flex">
+                        <div class="">
+                            <div class="d-flex">
+                                <div type="button" class="fill full-image-view all-thumb current">ইমেজ ভিউ</div>
+                                <div id="news_img_download" type="button" class="fill all-thumb">ডাউনলোড</div>
+                                <div id="close-popupMobile" type="button" class="fill all-thumb d-lg-none" onclick="closePreview()">বন্ধ করুন</div>
                             </div>
-                            <div id="img2"
-                                style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
-                                <canvas id="canvas_img2"></canvas>
+
+                            <div style="border: 1px solid #dee2e6!important; height: auto; background-color: white; padding: 10px; padding-bottom: 50px;">
+                                <div id="img1" class=""
+                                    style="display: flex; justify-content: center; align-items: center; margin-top: 50px; ">
+                                    <canvas id="canvas_img1"></canvas>
+                                </div>
+                                <div id="img2"
+                                    style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
+                                    <canvas id="canvas_img2"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -309,12 +377,25 @@
                     </div>
 
                 </div>
+
+                <div id="contentBelow_pagesUl" class="container-fluid d-md-flex d-lg-none">
+                    <ul class="ul_nav x-scrollable">
+                        @foreach ($get_categories as $key => $page)
+                            <li style="padding: 10px">
+                                <a style="text-decoration: none;" href="{{ $page->url }}"><img src="{{ $page->thumb }}">
+                                    <p style="margin-bottom: 0px;padding: 3px;background-color: #ebe5de;text-align: center;color: black;border-bottom: 2px solid #939993">
+                                        {{ $page->name }}</p>
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </main>
 
             <!-- epaper_header_bottom_ad -->
             @php $epaper_header_top_ad = \App\Epaper::GetAdvertisement('modal_bottom'); @endphp
             @if (!empty($epaper_header_top_ad) && !empty($epaper_header_top_ad->ad_code) && $epaper_header_top_ad->ad_status == '1')
-                <div class="add text-center"
+                <div class="hidden d-lg-block add text-center"
                     style="margin: 20px 0;padding: 15px 10px 15px 10px">
                     <?php echo $epaper_header_top_ad->ad_code; ?>
                 </div>
@@ -324,7 +405,7 @@
                 !empty($epaper_header_bottom_ad) &&
                     !empty($epaper_header_bottom_ad->ad_code) &&
                     $epaper_header_bottom_ad->ad_status == '1')
-                <div class="add text-center"
+                <div class="hidden d-lg-block add text-center"
                     style="margin: 20px 0;padding: 15px 10px 15px 10px">
                     <?php echo $epaper_header_bottom_ad->ad_code; ?>
                 </div>
@@ -447,24 +528,6 @@
                 document.getElementById("body").style.overflow = 'scroll';
             }
 
-            /*##################################
-            ## click on outside modal close ##
-            ###################################*/
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    /*==remove related image class==*/
-                    var remove_image_item = document.getElementsByClassName("image_view")[0].innerHTML = "";
-                    $(".modal-body .image_view").attr("src", remove_image_item);
-                    var remove_related_item = document.getElementsByClassName("related_image")[0].innerHTML = "";
-                    $(".modal-body .related_image").attr("src", remove_related_item);
-                    $('.image_view').show();
-                    modal.style.display = "none";
-                    $('.nxt').hide();
-                    $('.prvs').hide();
-                    document.getElementById("body").style.overflow = 'scroll';
-                }
-            }
-
 
             /*##################################
             ## modal open ##
@@ -475,60 +538,6 @@
                 if (div) {
                     div.style.display = 'none'; // Hide the div
                 }
-            }
-
-            function modalOpen2(image, image_location, related_item, image_width) {
-                console.log(image, image_location, related_item, image_width);
-                /*==modal width set==*/
-                var modal_width = image_width;
-                if (modal_width > 1050) {
-                    modal_width = 1050;
-                }
-                if (modal_width < 750) {
-                    modal_width = 750;
-                }
-
-                const content_div = document.getElementById('content_div');
-                const img_div = document.getElementById('img');
-
-                const rect = content_div.getBoundingClientRect();
-                const right = rect.right + window.scrollX; // Add scrollX to get document coordinates
-                const top = rect.top + window.scrollY; // Add scrollY to get document coordinates
-
-                const contentDivWidth = content_div.offsetWidth; // Get the width including padding and border
-                const contentDivheight = content_div.offsetHeight; // Get the width including padding and border
-                img_div.style.left = `calc(${right}px - 0px)`; // -20px for container padding
-
-                //document.getElementById("modal-content").style.width = modal_width+'px';
-                document.getElementById("img").style.width = modal_width + 'px';
-                document.getElementById("img").style.minHeight = contentDivheight - 72 + 'px';
-                //$('.related_image').hide();
-                var site_url = $('.site_url').val() + '/';
-                image_location = image_location.replace(/\/+$/, '') + '/';
-
-                const image_url = site_url + image_location + image;
-                // console.log(site_url, image_url);
-                //$(".modal-body .image_view").attr( "src", image );
-                $("#img1 img.img1").attr("src", image_url);
-
-                /*==next prev button==*/
-                if (related_item != '') {
-                    var related_image = site_url + image_location + related_item;
-                    //$(".modal-body .related_image").attr( "src", related_image );
-                    $("#img2 img.img2").attr("src", related_image);
-                    //$('.nxt').show();
-                    //$('.prvs').hide();
-                } else {
-                    $("#img2 img.img2").attr("src", "");
-                }
-
-                $('#img').show();
-
-                window.scrollTo({
-                    left: document.body.scrollWidth, //Scroll to the end of the body
-                    behavior: 'smooth'
-                });
-
             }
 
 

@@ -15,6 +15,7 @@ class Epaper extends Model
     {
       $tables_name = \DB::select("SHOW TABLES LIKE "."'" .$table_prefix. "%'");
 
+	  $td_name = [];
       foreach ($tables_name as $table) {
         foreach ($table as $key => $table_name){
           $td_name[] = $table_name;

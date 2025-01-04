@@ -3,13 +3,13 @@ version: '3.9'
 services:
   epaper:
     build:
-      context: ./epaper/docker/
+      context: ./docker/
       dockerfile: Dockerfile
     container_name: news24_epaper
     ports:
       - "82:80"
     volumes:
-      - ./epaper/:/var/www/html
+      - .:/var/www/html
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
     working_dir: /var/www/html/
@@ -22,7 +22,7 @@ services:
     image: mysql:5.7
     container_name: news24_epaper_db
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: droid273
       MYSQL_DATABASE: mrnetdoptor_epaper2
@@ -30,7 +30,7 @@ services:
       MYSQL_PASSWORD: droid273
     volumes:
       - db_data:/var/lib/mysql
-      - ./epaper:/docker-entrypoint-initdb.d
+      - .:/docker-entrypoint-initdb.d
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
