@@ -1,4 +1,5 @@
 jQuery(document).ready(function () {
+	document.getElementById("news_date").innerText = bn.date(document.getElementById("news_date").innerText, 'YYYY-MM-DD', 'DD-MM-YYYY');
 
 	const enableDays = $('#Datepicker1').data('publisheddates');
 
@@ -39,6 +40,9 @@ jQuery(document).ready(function () {
 		}
 	});
 
+	$("#Datepicker1 span").each((i, e) => {
+		console.log(e);
+	});
 
 	/*#############################
 	## onmouse hover show dropdown 
@@ -188,7 +192,6 @@ jQuery(document).ready(function () {
 	}
 
 	function stickyHeader() {
-		moment.locale('bn');
         const timenow = moment().format('DD MMMM YYYY');
 		$('#today_date').text(timenow);
 		$('.sticky-categories-nav').html($('div.categories-nav nav').prop('outerHTML'));

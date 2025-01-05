@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.app', function ($view) {
             $view->with('categories', json_decode(Storage::get("data/news_categories.json"), true));
         });
-        
+        require_once app_path('helpers.php');
     }
 
     /**

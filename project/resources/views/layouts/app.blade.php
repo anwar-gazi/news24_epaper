@@ -3,6 +3,7 @@
 <head>
     @php
         $asset_version = time();
+        app()->setLocale('bn');
     @endphp
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -266,7 +267,7 @@
                             <a class="hidden" href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}" style="position: absolute; left: 0"></a>
                             <div class="">
                                 <div tabindex="0" class="datepicker_wrapper archive-cal-level text-center relative" onclick="show('Datepicker1')">
-                                    <div class="inline"><i class="fa fa-calendar"></i> <span>{{ $date }}</span></div>
+                                    <div class="inline"><i class="fa fa-calendar"></i> <span id="news_date">{{ $date }}</span></div>
                                     <div id="Datepicker1" class="absolute z-1 hidden" data-publishedDates="{{ $publishDates }}"></div>
                                 </div>
                             </div>
@@ -274,7 +275,7 @@
                                 <div class="pagination lg-float-right" style="margin: 0px;padding: 0px">
                                     <a style="margin-left: 0px;" href="#">&laquo;</a>
                                     @for ($i = 1; $i <= count($pagination_pages); $i++)
-                                        <a class="{{ $i==$page_current? 'current' : '' }}" href="{{ url('/nogor-edition/' . $date . '/' . $i) }}">{{ $i }}</a>
+                                        <a class="{{ $i==$page_current? 'current' : '' }}" href="{{ url('/nogor-edition/' . $date . '/' . $i) }}" data-translate="1">{{ translateNumber($i) }}</a>
                                     @endfor
                                     <a href="{{ url('/nogor-edition/' . $date . '/1') }}">&raquo;</a>
                                 </div>
@@ -490,80 +491,80 @@
             /*################################
             ## click on modal (x) close ##
             #################################*/
-            button.onclick = function() {
-                /*==remove related image class==*/
-                var remove_image_item = document.getElementsByClassName("image_view")[0].innerHTML = "";
-                $(".modal-body .image_view").attr("src", remove_image_item);
-                var remove_related_item = document.getElementsByClassName("related_image")[0].innerHTML = "";
-                $(".modal-body .related_image").attr("src", remove_related_item);
+            // button.onclick = function() {
+            //     /*==remove related image class==*/
+            //     var remove_image_item = document.getElementsByClassName("image_view")[0].innerHTML = "";
+            //     $(".modal-body .image_view").attr("src", remove_image_item);
+            //     var remove_related_item = document.getElementsByClassName("related_image")[0].innerHTML = "";
+            //     $(".modal-body .related_image").attr("src", remove_related_item);
 
-                modal.style.display = "none";
-                document.getElementById("body").style.overflow = 'scroll';
-            }
+            //     modal.style.display = "none";
+            //     document.getElementById("body").style.overflow = 'scroll';
+            // }
 
 
             /*##################################
             ## modal open ##
             ###################################*/
 
-            function closeDiv() {
-                const div = document.getElementById('img');
-                if (div) {
-                    div.style.display = 'none'; // Hide the div
-                }
-            }
+            // function closeDiv() {
+            //     const div = document.getElementById('img');
+            //     if (div) {
+            //         div.style.display = 'none'; // Hide the div
+            //     }
+            // }
 
 
 
             /*##################################
             ## click on next button ##
             ###################################*/
-            $(".nxt").click(function() {
-                $('.image_view').hide();
-                $('.prvs').show();
-                $('.nxt').hide();
-                $('.related_image').show();
+            // $(".nxt").click(function() {
+            //     $('.image_view').hide();
+            //     $('.prvs').show();
+            //     $('.nxt').hide();
+            //     $('.related_image').show();
 
-                var modal_width = $('.related_image').width();
-                if (modal_width > 1050) {
-                    modal_width = 1050;
-                }
-                if (modal_width < 750) {
-                    modal_width = 750;
-                }
-                document.getElementById("modal-content").style.width = modal_width + 'px';
-            });
+            //     var modal_width = $('.related_image').width();
+            //     if (modal_width > 1050) {
+            //         modal_width = 1050;
+            //     }
+            //     if (modal_width < 750) {
+            //         modal_width = 750;
+            //     }
+            //     document.getElementById("modal-content").style.width = modal_width + 'px';
+            // });
 
 
 
             /*##################################
             ## click on previous ##
             ###################################*/
-            $(".prvs").click(function() {
-                $('.image_view').show();
-                $('.prvs').hide();
-                $('.nxt').show();
-                $('.related_image').hide();
+            // $(".prvs").click(function() {
+            //     $('.image_view').show();
+            //     $('.prvs').hide();
+            //     $('.nxt').show();
+            //     $('.related_image').hide();
 
-                var modal_width = $('.image_view').width();
-                if (modal_width > 1050) {
-                    modal_width = 1050;
-                }
-                if (modal_width < 750) {
-                    modal_width = 750;
-                }
-                document.getElementById("modal-content").style.width = modal_width + 'px';
-            });
+            //     var modal_width = $('.image_view').width();
+            //     if (modal_width > 1050) {
+            //         modal_width = 1050;
+            //     }
+            //     if (modal_width < 750) {
+            //         modal_width = 750;
+            //     }
+            //     document.getElementById("modal-content").style.width = modal_width + 'px';
+            // });
 
 
             /*##################################
             ## click on close button ##
             ###################################*/
-            $(".close").click(function() {
-                $('.nxt').hide();
-                $('.prvs').hide();
-                $('.image_view').show();
-            });
+            // $(".close").click(function() {
+            //     $('.nxt').hide();
+            //     $('.prvs').hide();
+            //     $('.image_view').show();
+            // });
         </script>
         <!--end js for modal-->
 
@@ -742,6 +743,7 @@
             
         </script>
 
+        <script type="text/javascript" src="{{ asset('assets/js/bn.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
 
         <input type="hidden" class="site_url" value="{{ url('/') }}">
