@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    @php
+        $asset_version = time();
+    @endphp
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     @php $epaper_het = \App\Epaper::Getinformation(); @endphp
     <title><?php echo $epaper_het->epapper_name; ?></title>
@@ -258,18 +262,22 @@
 
                     <!-- main paper div -->
                     <div id="content_div" class="relative">
-                        <div id="content_topbar">
+                        <div id="content_topbar" class="md-py-15">
                             <a class="hidden" href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}" style="position: absolute; left: 0"></a>
-                            <div tabindex="0" class="datepicker_wrapper archive-cal-level text-center relative float-left" onclick="show('Datepicker1')">
-                                <div class="inline"><i class="fa fa-calendar"></i> <span>{{ $date }}</span></div>
-                                <div id="Datepicker1" class="absolute z-1 hidden" data-publishedDates="{{ $publishDates }}"></div>
+                            <div class="">
+                                <div tabindex="0" class="datepicker_wrapper archive-cal-level text-center relative" onclick="show('Datepicker1')">
+                                    <div class="inline"><i class="fa fa-calendar"></i> <span>{{ $date }}</span></div>
+                                    <div id="Datepicker1" class="absolute z-1 hidden" data-publishedDates="{{ $publishDates }}"></div>
+                                </div>
                             </div>
-                            <div class="pagination" style="margin: 0px;padding: 0px">
-                                <a style="margin-left: 0px;" href="#">&laquo;</a>
-                                @for ($i = 1; $i <= count($pagination_pages); $i++)
-                                    <a class="{{ $i==$page_current? 'current' : '' }}" href="{{ url('/nogor-edition/' . $date . '/' . $i) }}">{{ $i }}</a>
-                                @endfor
-                                <a href="{{ url('/nogor-edition/' . $date . '/1') }}">&raquo;</a>
+                            <div class="fill">
+                                <div class="pagination lg-float-right" style="margin: 0px;padding: 0px">
+                                    <a style="margin-left: 0px;" href="#">&laquo;</a>
+                                    @for ($i = 1; $i <= count($pagination_pages); $i++)
+                                        <a class="{{ $i==$page_current? 'current' : '' }}" href="{{ url('/nogor-edition/' . $date . '/' . $i) }}">{{ $i }}</a>
+                                    @endfor
+                                    <a href="{{ url('/nogor-edition/' . $date . '/1') }}">&raquo;</a>
+                                </div>
                             </div>
                             <div class="d-md-none">
                                 @if (!empty($home_page))

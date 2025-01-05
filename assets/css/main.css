@@ -1079,6 +1079,11 @@ nav a:hover {
   text-align: center !important;
 }
 
+#content_topbar {
+  display: flex;
+  justify-content: flex-start;
+}
+
 
 .flex-container, .d-flex {
   display: flex;
@@ -1322,8 +1327,23 @@ img {
     display: flex !important;
   }
 
+  .d-md-block {
+    display: block;
+  }
+
   .d-md-none {
     display: none;
+  }
+
+  .md-float-left {
+    float: left;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .md-py-15 {
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 }
 
@@ -1358,5 +1378,17 @@ img {
 
   #content_div {
     padding-left: 10px;width: auto;margin-left: 10px;
+  }
+
+  .lg-float-left {
+    float: left;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .lg-float-right {
+    float: right;
+    text-align: center;
+    box-sizing: border-box;
   }
 }
