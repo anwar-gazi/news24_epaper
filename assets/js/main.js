@@ -149,8 +149,9 @@ jQuery(document).ready(function () {
 			$("#img2").hide();
 		}
 
-		$('#img').show();
+		$('#img').removeClass("d-md-none");
 		$("header#header_non-sticky, #content_div, #contentBelow_pagesUl, .footer").addClass("d-md-none");
+		$('#contentBelow_pagesUl').removeClass('d-md-flex');
 
 		window.scrollTo({
 			left: document.body.scrollWidth, //Scroll to the end of the body
@@ -160,8 +161,11 @@ jQuery(document).ready(function () {
 	}
 
 	function closePreview() {
+		$('#img').addClass("d-md-none");
+		$("header#header_non-sticky, #content_div, #contentBelow_pagesUl, .footer").removeClass("d-md-none");
+		$('#contentBelow_pagesUl').addClass('d-md-flex');
 		if (window.matchMedia('(max-width: 768px)')) {
-			$("header#header_non-sticky, #content_div, #contentBelow_pagesUl, .footer").removeClass("d-md-none");
+			
 		}
 	}
 

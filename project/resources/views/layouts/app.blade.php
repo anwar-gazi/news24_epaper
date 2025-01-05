@@ -271,7 +271,7 @@
                                 @endfor
                                 <a href="{{ url('/nogor-edition/' . $date . '/1') }}">&raquo;</a>
                             </div>
-                            <div>
+                            <div class="d-md-none">
                                 @if (!empty($home_page))
                                     @php
                                         $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
@@ -302,7 +302,7 @@
                     <!-- end search result not found messages -->
 
 
-                    <div id="img" class="fill-remaining hidden d-lg-flex">
+                    <div id="img" class="fill-remaining d-md-none">
                         <div class="">
                             <div class="d-flex">
                                 <div type="button" class="fill full-image-view all-thumb current">ইমেজ ভিউ</div>
