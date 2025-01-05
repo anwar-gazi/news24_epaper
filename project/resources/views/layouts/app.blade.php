@@ -78,6 +78,8 @@
         $epaper_het = \App\Epaper::Getinformation(); 
         $logoSrc = asset('admin/assets/images/logo/') . '/' . $epaper_het->logo;
         $logoIconSrc = asset('admin/assets/images/ni.png');
+
+        $publishDates = json_encode(DB::table('publish_dates')->where('status', 1)->pluck('publish_date'));
     @endphp
     <div class="main-container" style="margin-top: 10px;margin-bottom: 5px;">
         <div class="header-div">
@@ -258,25 +260,27 @@
                     <div id="content_div" class="relative">
                         <div id="content_topbar">
                             <a class="hidden" href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}" style="position: absolute; left: 0"></a>
-                            <div tabindex="0" class="archive-cal-level text-center relative float-left" onclick="show('Datepicker1')" onfocusout="hide('Datepicker1')">
+                            <div tabindex="0" class="datepicker_wrapper archive-cal-level text-center relative float-left" onclick="show('Datepicker1')">
                                 <div class="inline"><i class="fa fa-calendar"></i> <span>{{ $date }}</span></div>
-                                <div id="Datepicker1" class="absolute z-1 hidden"></div>
+                                <div id="Datepicker1" class="absolute z-1 hidden" data-publishedDates="{{ $publishDates }}"></div>
                             </div>
                             <div class="pagination" style="margin: 0px;padding: 0px">
                                 <a style="margin-left: 0px;" href="#">&laquo;</a>
                                 @for ($i = 1; $i <= count($pagination_pages); $i++)
-                                    <a href="{{ url('/nogor-edition/' . $date . '/' . $i) }}">{{ $i }}</a>
+                                    <a class="{{ $i==$page_current? 'current' : '' }}" href="{{ url('/nogor-edition/' . $date . '/' . $i) }}">{{ $i }}</a>
                                 @endfor
                                 <a href="{{ url('/nogor-edition/' . $date . '/1') }}">&raquo;</a>
                             </div>
-                            @if (!empty($home_page))
-                                @php
-                                    $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
-                                @endphp
-                                <button onclick='printPage("{{ $srcImage }}");' style="position: absolute; right: 0">
-                                    <i class="fa fa-print"></i></button>
-                                <canvas id="printable" style="display: none;" data-srcImage="{{ $srcImage }}"></canvas>
-                            @endif
+                            <div>
+                                @if (!empty($home_page))
+                                    @php
+                                        $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
+                                    @endphp
+                                    <button onclick='printPage("{{ $srcImage }}");' style="position: absolute; right: 0">
+                                        <i class="fa fa-print"></i></button>
+                                    <canvas id="printable" style="display: none;" data-srcImage="{{ $srcImage }}"></canvas>
+                                @endif
+                            </div>
                         </div>
 
                         <div>
@@ -284,8 +288,8 @@
                         </div>
 
                         <div class="epaper-page-bar1 mt-4">
-                            <a href="{{ url('/all/pages/nogor-edition/' . $date) }}" class="e-previous e-previous-page e-but mr-3 e-previous-clse"><i class="fa fa-angle-left d-lg-block"></i></a>
-                            <a href="{{ url('/nogor-edition/' . $date . '/2') }}" class="e-next e-but"><i class="fa fa-angle-right d-lg-block"></i></a>
+                            <a href="{{ url('/nogor-edition/' . $date . '/' . $page_prev) }}" class="e-previous e-previous-page e-but mr-3 e-previous-clse"><i class="fa fa-angle-left d-lg-block"></i></a>
+                            <a href="{{ url('/nogor-edition/' . $date . '/' . $page_next) }}" class="e-next e-but"><i class="fa fa-angle-right d-lg-block"></i></a>
                         </div>
                     </div>
 
@@ -452,45 +456,6 @@
                 </div>
             </div>
         </div>
-
-
-        @php $publishDates = DB::table('publish_dates')->where('status', 1)->pluck('publish_date'); @endphp
-
-        <!-- datepicker -->
-        <script type="text/javascript">
-            jQuery(function() {
-                var enableDays = <?php echo json_encode($publishDates); ?>;
-
-                function enableAllTheseDays(date) {
-                    var sdate = $.datepicker.formatDate('yy-mm-dd', date)
-                    if ($.inArray(sdate, enableDays) != -1) {
-                        return [true];
-                    }
-                    return [false];
-                }
-                $('#Datepicker1').datepicker({
-                    dateFormat: 'yy-mm-dd',
-                    beforeShowDay: enableAllTheseDays
-                });
-            })
-
-
-            $(function() {
-                $("#Datepicker1").datepicker();
-                $("#Datepicker1").on("change", function() {
-                    var archive_date = $(this).val();
-                    var site_url = $(".site_url").val();
-                    if (archive_date == '') {
-                        alert('Please Select A Valid Date !');
-                        window.reload();
-                    }
-                    if (archive_date != null) {
-                        var request_url = site_url + '/nogor-edition/' + archive_date + '/1';
-                        window.location = request_url;
-                    }
-                });
-            });
-        </script>
 
 
         <!-- search result not found -->

@@ -7,25 +7,7 @@
 
 <!-- pagination -->
 <style type="text/css">
-	.pagination {
-		display: inline-block;
-		margin-top: 15px;
-	}
-	.pagination a {
-		color: white;
-		float: left;
-		padding: 2px 7px;
-		text-decoration: none;
-		background-color: #846d6d;
-		border: 1px solid #ddd;
-		margin: 0 4px;
-	}
-	.pagination a.active {
-		background-color: #CC0000;
-		color: white;
-		border: 1px solid #CC0000;
-	}
-	.pagination a:hover:not(.active) {background-color: #ddd;}
+
 </style>
 
 <style type="text/css">
@@ -42,7 +24,7 @@
 
 	@if(!empty($date))
 	@php $date_show=\App\Epaper::GetBanglaDate($date); @endphp
-	<table style="width: 100%;background-color: #D2D0CE;margin: 0px 0px 10px 0px">
+	{{-- <table style="width: 100%;background-color: #D2D0CE;margin: 0px 0px 10px 0px">
 		<tr>
 			<td>
 				<center style="position: relative">
@@ -63,7 +45,7 @@
 				</center>
 			</td>
 		</tr>
-	</table>
+	</table> --}}
 	@else
 	@php $date_show=Null; $data = Null; @endphp
 	@endif
@@ -102,7 +84,7 @@
 
 
 		<!-- page trigger -->
-		<table width="100%" class="page-trigger" style="padding: 10px 10px 0px 10px;margin-left: 0px">
+		<table width="100%" class="hidden page-trigger" style="padding: 10px 10px 0px 10px;margin-left: 0px">
 			<tr>
 				<td>
 					@if(($page_last+1)>1)

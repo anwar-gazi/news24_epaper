@@ -1,5 +1,45 @@
 jQuery(document).ready(function () {
 
+	const enableDays = $('#Datepicker1').data('publisheddates');
+
+	function enableAllTheseDays(date) {
+		var sdate = $.datepicker.formatDate('yy-mm-dd', date)
+		if ($.inArray(sdate, enableDays) != -1) {
+			return [true];
+		}
+		return [false];
+	}
+	$('#Datepicker1').datepicker({
+		dateFormat: 'yy-mm-dd',
+		beforeShowDay: enableAllTheseDays
+	});
+
+	$("#Datepicker1").on("change", function() {
+		var archive_date = $(this).val();
+		console.log(archive_date);
+		var site_url = $(".site_url").val();
+		if (archive_date == '') {
+			alert('Please Select A Valid Date !');
+			window.reload();
+		}
+		if (archive_date != null) {
+			var request_url = site_url + '/nogor-edition/' + archive_date + '/1';
+			window.location = request_url;
+		}
+	});
+
+	$(document).on('click', (e) => {
+		const p = $(e.target).closest('div#Datepicker1');
+		const p2 = $(e.target).closest('div.datepicker_wrapper');
+		if ($('#Datepicker1').is(':visible')) { // is datepicker open
+			// console.log(p.length, p2.length);
+			if (!p.length && !p2.length && !$(e.target).hasClass('ui-icon')) {
+				$('#Datepicker1').hide();
+			}
+		}
+	});
+
+
 	/*#############################
 	## onmouse hover show dropdown 
 	###############################*/

@@ -22,6 +22,8 @@ class EpaperController extends Controller
 
     	if(!empty($page_info->publish_date)){
 
+            $current_page = 1;
+
             ## get required tables ##
     		$date=$page_info->publish_date;
     		$pages_table = 'pages_'.date('Y_m', strtotime($date));
@@ -42,9 +44,10 @@ class EpaperController extends Controller
     		->leftjoin('categories','categories.id','=',$pages_table.'.category_id')
     		->select([\DB::RAW('DISTINCT(category_id)'), $pages_table.'.publish_date', $pages_table.'.page_number', $pages_table.'.image', 'categories.name'])->get();
     		$data['get_categories']=$get_categories;
+            // dd($get_categories);die();
 
 
-    		$get_page=\DB::table($pages_table)->where($pages_table.'.publish_date', $date)->where($pages_table.'.page_number', 1)->where($pages_table.'.status', 1)
+    		$get_page=\DB::table($pages_table)->where($pages_table.'.publish_date', $date)->where($pages_table.'.page_number', $current_page)->where($pages_table.'.status', 1)
     		->leftjoin($edition_pages_table, $edition_pages_table.'.page_id','=', $pages_table.'.id')->where($edition_pages_table.'.edition_id', $by_edition->id)
     		->select($pages_table.'.*', $edition_pages_table.'.page_id', $edition_pages_table.'.edition_id')->first();
     		$data['home_page']=$get_page;
@@ -64,6 +67,14 @@ class EpaperController extends Controller
 
     		$data['date']=$date;
             $data['info']=$info;
+
+            $page_last = count($get_categories);
+            $data['page_current']=$current_page;
+            $data['page_first']=1;
+            $data['page_last']=$page_last;
+            $data['page_next']= $current_page==$page_last? 1 : $current_page + 1;
+            $data['page_prev']=max(1, $current_page - 1);
+            
             return \View::make('epaper.index',$data);  
         }
 
@@ -176,6 +187,14 @@ class EpaperController extends Controller
                $data['current_page']=$page_no;
                $data['get_categories']=$get_categories;
                $data['current_edition']=$by_edition->name;
+
+               $current_page = $page_no;
+               $page_last = count($get_categories);
+            $data['page_current']=$current_page;
+            $data['page_first']=1;
+            $data['page_last']=$page_last;
+            $data['page_next']= $current_page==$page_last? 1 : $current_page + 1;
+            $data['page_prev']=max(1, $current_page - 1);
 
                return \View::make('epaper.by-edition',$data);
 

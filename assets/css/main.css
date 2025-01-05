@@ -940,6 +940,29 @@ div.tab a:focus,
   /* IE6-9 */
 }
 
+.pagination {
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.pagination a {
+  float: left;
+  padding: 2px 7px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #CC0000;
+  color: white;
+  border: 1px solid #CC0000;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
+
 header.sticky {
   position: fixed;
   top: 0px;
