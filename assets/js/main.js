@@ -12,10 +12,15 @@ jQuery(document).ready(function () {
 	}
 	$('#Datepicker1').datepicker({
 		dateFormat: 'yy-mm-dd',
-		beforeShowDay: enableAllTheseDays
+		beforeShowDay: enableAllTheseDays,
+		monthNames: [ "জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন", 
+			"জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর" ],
+		dayNamesMin: [ "রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি" ] 
 	});
 
-	$("#Datepicker1").on("change", function() {
+	$("#Datepicker1").datepicker("option", $.datepicker.regional['bn']);
+
+	$("#Datepicker1").on("change", function () {
 		var archive_date = $(this).val();
 		console.log(archive_date);
 		var site_url = $(".site_url").val();
@@ -41,7 +46,7 @@ jQuery(document).ready(function () {
 	});
 
 	$("#Datepicker1 span").each((i, e) => {
-		console.log(e);
+		// console.log(e);
 	});
 
 	/*#############################
@@ -169,7 +174,7 @@ jQuery(document).ready(function () {
 		$("header#header_non-sticky, #content_div, #contentBelow_pagesUl, .footer").removeClass("d-md-none");
 		$('#contentBelow_pagesUl').addClass('d-md-flex');
 		if (window.matchMedia('(max-width: 768px)')) {
-			
+
 		}
 	}
 
@@ -192,7 +197,7 @@ jQuery(document).ready(function () {
 	}
 
 	function stickyHeader() {
-        const timenow = moment().format('DD MMMM YYYY');
+		const timenow = moment().format('DD MMMM YYYY');
 		$('#today_date').text(timenow);
 		$('.sticky-categories-nav').html($('div.categories-nav nav').prop('outerHTML'));
 
@@ -221,10 +226,10 @@ jQuery(document).ready(function () {
 	}
 
 	function show(id) {
-		$('#'+id).show();
+		$('#' + id).show();
 	}
 	function hide(id) {
-		$('#'+id).hide();
+		$('#' + id).hide();
 	}
 
 	stickyHeader();
