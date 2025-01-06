@@ -14,7 +14,7 @@ class NewsCategoriesFetch extends Command
      *
      * @var string
      */
-    protected $signature = 'news:categories {url} {news-root}';
+    protected $signature = 'news:categories {url?} {news-root?}';
 
     /**
      * The console command description.
@@ -48,9 +48,14 @@ class NewsCategoriesFetch extends Command
      */
     public function handle()
     {
-        $apiUrl = $this->argument('url');
-        $catRootUrl = $this->argument('news-root');
+        $apiUrl = $this->argument('url') ? $this->argument('url') : env('NEWS_CATEGORY_API');
+        $catRootUrl = $this->argument('news-root') ? $this->argument('news-root') : env('NEWS_WEB_ROOT');
         $filepath = "data/news_categories.json";
+
+        if (!$apiUrl || !$catRootUrl) {
+            $this->error("not enough arguments");
+            return 1;
+        }
 
         try {
             $context = stream_context_create([
