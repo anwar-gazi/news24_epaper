@@ -1,8 +1,19 @@
 jQuery(document).ready(function () {
 
-	(function() {
+	// (function () {
+	// 	const navToggle = document.getElementById('nav-y-toggle');
+	// 	const navbar = document.getElementById('right-navbar');
+	// 	const body = document.body;
+
+	// 	navToggle.addEventListener('click', () => {
+	// 		navbar.classList.toggle('open');
+	// 		document.body.classList.toggle('blur');
+	// 	});
+	// })();
+
+	(function () {
 		const home_url = rtrimForwardSlash($('a#home_url').attr('href'));
-		$('#search_input').keypress(function(event) {
+		$('#search_input').keypress(function (event) {
 			if (event.which === 13 && event.target.value.trim()) {
 				const needle = encodeURIComponent(event.target.value);
 				const url = home_url + "?q=" + needle;

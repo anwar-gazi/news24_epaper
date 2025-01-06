@@ -86,7 +86,21 @@
 
         $publishDates = json_encode(DB::table('publish_dates')->where('status', 1)->pluck('publish_date'));
     @endphp
-    <div class="main-container" style="margin-top: 10px;margin-bottom: 5px;">
+    <div class="hidden " id="right-navbar">
+        <div class="d-flex">
+            <div style="margin-left: auto; margin-right: 10px;">
+                <button type="button" style="width: 2rem; height: 2rem; cursor: pointer" onclick="[hide('#right-navbar'), document.getElementById('main-container').classList.toggle('blur')]">X</button>
+            </div>
+        </div>
+        <div>
+            <nav class="nav-y">
+                @foreach($categories as $cat)
+                    <li><a href="{{ $cat['url'] }}" title="{{ $cat['label'] }}">{{ $cat['label'] }}</a></li>
+                @endforeach
+            </nav>
+        </div>
+    </div>
+    <div id="main-container" class="main-container" style="margin-top: 10px;margin-bottom: 5px;">
         <div class="header-div">
             <header id="header_non-sticky" class="header-div non-sticky" style="box-shadow: 0 3px 5px #eee">
                 <div class="container-fluid d-flex justify-content-between align-items-center py-2">
@@ -98,47 +112,48 @@
                     </div>
                   
                     <div style="padding-right: 10%">
-                        <nav class="ms-auto d-none d-lg-flex">  <ul class="nav list-unstyled mb-0">
-                            <li class="nav-item">
-                            <a href="<?php echo $epaper_het->online; ?>" target="_blank" class="nav-link" style="color: #cd0000;">
-                                <img height="20" alt="Site symbol logo" class="me-2" src="{{ $logoIconSrc }}" style="vertical-align: sub;"> অনলাইন
-                            </a>
-                            </li>
-                            <li class="nav-item">
-                            <a href="#" target="_blank" class="nav-link">
-                                <i class="fa-sharp fa-solid fa-table-list"></i> আজকের পত্রিকা
-                            </a>
-                            </li>
-                            <li class="nav-item">
-                            <a href="#" target="_blank" class="nav-link">
-                                <img width="16" src="https://kalbela.com/assets/verified_icon/archive.png" class="me-2" alt="archive"> আর্কাইভ
-                            </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="fa-solid fa-thumbs-up me-2"></i> সোশ্যাল মিডিয়া
-                            </a>
-                            <ul class="dropdown-menu megamenu shadow"> <li>
-                                <a href="<?php echo $epaper_het->facebook; ?>" target="_blank" class="d-flex align-items-center">
-                                    <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-                                    <span class="ms-2">ফেসবুক</span>
+                        <nav class="nav-x ms-auto d-none d-lg-flex">  
+                            <ul class="nav list-unstyled mb-0">
+                                <li class="nav-item">
+                                <a href="<?php echo $epaper_het->online; ?>" target="_blank" class="nav-link" style="color: #cd0000;">
+                                    <img height="20" alt="Site symbol logo" class="me-2" src="{{ $logoIconSrc }}" style="vertical-align: sub;"> অনলাইন
                                 </a>
                                 </li>
-                                <li>
-                                <a href="<?php echo $epaper_het->youtube; ?>" target="_blank" class="d-flex align-items-center">
-                                    <i class="fa-brands fa-youtube" aria-hidden="true"></i>
-                                    <span class="ms-2">ইউটিউব</span>
+                                <li class="nav-item">
+                                <a href="#" target="_blank" class="nav-link">
+                                    <i class="fa-sharp fa-solid fa-table-list"></i> আজকের পত্রিকা
                                 </a>
                                 </li>
-                                <li>
-                                <a href="{{ $epaper_het->twitter ? $epaper_het->twitter : "#" }}" target="_blank" class="d-flex align-items-center">
-                                    <i class="fa-brands fa-twitter" aria-hidden="true"></i>
-                                    <span class="ms-2">টুইটার</span>
+                                <li class="nav-item">
+                                <a href="#" target="_blank" class="nav-link">
+                                    <img width="16" src="https://kalbela.com/assets/verified_icon/archive.png" class="me-2" alt="archive"> আর্কাইভ
                                 </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                        <i class="fa-solid fa-thumbs-up me-2"></i> সোশ্যাল মিডিয়া
+                                    </a>
+                                    <ul class="dropdown-menu megamenu shadow"> <li>
+                                        <a href="<?php echo $epaper_het->facebook; ?>" target="_blank" class="d-flex align-items-center">
+                                            <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                                            <span class="ms-2">ফেসবুক</span>
+                                        </a>
+                                        </li>
+                                        <li>
+                                        <a href="<?php echo $epaper_het->youtube; ?>" target="_blank" class="d-flex align-items-center">
+                                            <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+                                            <span class="ms-2">ইউটিউব</span>
+                                        </a>
+                                        </li>
+                                        <li>
+                                        <a href="{{ $epaper_het->twitter ? $epaper_het->twitter : "#" }}" target="_blank" class="d-flex align-items-center">
+                                            <i class="fa-brands fa-twitter" aria-hidden="true"></i>
+                                            <span class="ms-2">টুইটার</span>
+                                        </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                            </li>
-                        </ul>
                         </nav>
                     </div>
 
@@ -166,15 +181,6 @@
                             </div>
                         </div>
                     </div>
-                  
-                    <button class="btn btn-light d-lg-none hidden" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
-                      <i class="fa-solid fa-bars"></i>
-                    </button>
-                  </div>
-                  
-                  <div class="collapse" id="mobileNav">
-                    <nav class="nav flex-column px-3 py-2">
-                      </nav>
                   </div>
 
 
@@ -190,32 +196,22 @@
 
                 <div style="border-top: 1px solid #ccc;">
                     <div class="add text-center categories-nav container-fluid scrollmenu" style="padding: 20px 0; ">
-                        <nav>
-                            <ul>
+                        <nav class="nav-x ">
+                            <ul class="d-flex">
                                 <li><a href="{{ url('/') }}" aria-label="Latest News"><i class="fa-solid fa-house"></i></a></li>
-                                @foreach($categories as $cat)
+                                @php
+                                    $categories_nav = array_slice($categories, 0, 10);
+                                @endphp
+                                @foreach($categories_nav as $cat)
                                     <li><a href="{{ $cat['url'] }}" title="{{ $cat['label'] }}">{{ $cat['label'] }}</a></li>
                                 @endforeach
+                                <li>
+                                    <button onclick="[show('#right-navbar'), document.getElementById('main-container').classList.toggle('blur')]" id="nav-y-toggle" class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                                        <i class="fa-solid fa-bars"></i>
+                                    </button>
+                                </li>
                             </ul>
                         </nav>
-                        @if (!empty($date))
-                            @php $date_show = \App\Epaper::GetBanglaDate($date); @endphp
-                            <input type="hidden" id="bangla_date" name="bangla_date" value="{{ isset($date_show) ? $date_show : '' }}">
-
-                            <p class="hidden" style="margin-top: 10px">
-                                @if (!empty($date))
-                                    <a href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}"></a>
-                                @endif
-
-                                @if (!empty($home_page) && !empty($date))
-                                    @php
-                                        $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
-                                    @endphp
-                                    <a href="javascript::void(0)" onclick='printPage("{{ $srcImage }}");' ><img src="{{ asset('assets/images/front/print.png') }}"></a>
-                                    <canvas id="printable" style="display: none;" data-srcImage="{{ $srcImage }}"></canvas>
-                                @endif
-                            </p>
-                        @endif
                     </div>
                 </div>
             </header>
@@ -228,7 +224,7 @@
                                 <img class="img-fluid logo" src="{{ $logoIconSrc }}"> | <span id="today_date"></span></a>
                         </div>
                         <div class="flex-fill pt-2 sticky-categories-nav">
-                            <nav>
+                            <nav class="nav-x ">
                             </nav>
                         </div>
                     </div>
