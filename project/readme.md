@@ -6,3 +6,5 @@ Run artisan with docker container's php executable: sudo docker-compose run epap
 
 cronjob: * * * * * /usr/bin/php /path/to/your/project/artisan schedule:work >> /dev/null 2>&1
 
+google custom search console: https://programmablesearchengine.google.com/controlpanel/overview?cx=a5087d58341484682
+
