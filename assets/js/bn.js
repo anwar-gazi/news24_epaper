@@ -5,6 +5,14 @@ const isNumeric = (str) => {
     }
     return !isNaN(str) && !isNaN(parseFloat(str));
 };
+
+function transposeObject(obj) {
+    const transposedObj = {};
+    for (const key in obj) {
+        transposedObj[obj[key]] = key;
+    }
+    return transposedObj;
+}
 window.bn = {
     char_map: {
         1: "১",
@@ -17,25 +25,25 @@ window.bn = {
         8: "৮",
         9: "৯",
         0: "০",
-        "january": "জানুয়ারী",
-        "february": "ফেব্রুয়ারী",
-        "march": "মার্চ",
-        "april": "এপ্রিল",
-        "may": "মে",
-        "june": "জুন",
-        "july": "জুলাই",
-        "august": "আগষ্ট",
-        "september": "সেপ্টেম্বর",
-        "october": "অক্টোবর",
-        "november": "নভেম্বার",
-        "december": "ডিসেম্বার",
-        "su": "রবি",
-        "mo": "সোম",
-        "tu": "মঙ্গল",
-        "we": "বুধ",
-        "th": "বৃহ:",
-        "fr": "শুক্র",
-        "sa": "শনি",
+        // "january": "জানুয়ারী",
+        // "february": "ফেব্রুয়ারী",
+        // "march": "মার্চ",
+        // "april": "এপ্রিল",
+        // "may": "মে",
+        // "june": "জুন",
+        // "july": "জুলাই",
+        // "august": "আগষ্ট",
+        // "september": "সেপ্টেম্বর",
+        // "october": "অক্টোবর",
+        // "november": "নভেম্বার",
+        // "december": "ডিসেম্বার",
+        // "su": "রবি",
+        // "mo": "সোম",
+        // "tu": "মঙ্গল",
+        // "we": "বুধ",
+        // "th": "বৃহ:",
+        // "fr": "শুক্র",
+        // "sa": "শনি",
     },
     date: function (date, in_format, out_format) {
         moment.locale('bn');
@@ -43,9 +51,12 @@ window.bn = {
     },
     bn: function (char) {
         if (char.length > 1 && isNumeric(char)) {
-            return char.split("").map((c) => this.char_map[c]);
+            return char.split("").map((c) => this.char_map[c]).join("");
         } else {
             return this.char_map[char];
         }
-    }.bind(this),
+    },
+    bn2en: function (char) {
+        return transposeObject(this.char_map)[char];
+    }
 };

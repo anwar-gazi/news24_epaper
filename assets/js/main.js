@@ -1,24 +1,26 @@
 jQuery(document).ready(function () {
-	document.getElementById("news_date").innerText = bn.date(document.getElementById("news_date").innerText, 'YYYY-MM-DD', 'DD-MM-YYYY');
 
 	const enableDays = $('#Datepicker1').data('publisheddates');
-
-	function enableAllTheseDays(date) {
-		var sdate = $.datepicker.formatDate('yy-mm-dd', date)
-		if ($.inArray(sdate, enableDays) != -1) {
-			return [true];
-		}
-		return [false];
-	}
+	// function enableAllTheseDays(date) {
+	// 	var sdate = $.datepicker.formatDate('yy-mm-dd', date)
+	// 	if ($.inArray(sdate, enableDays) != -1) {
+	// 		return [true];
+	// 	}
+	// 	return [false];
+	// }
 	$('#Datepicker1').datepicker({
+		firstDay: 6,
 		dateFormat: 'yy-mm-dd',
-		beforeShowDay: enableAllTheseDays,
-		monthNames: [ "জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন", 
-			"জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর" ],
-		dayNamesMin: [ "রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি" ] 
+		beforeShowDay: (date) => {
+			var sdate = $.datepicker.formatDate('yy-mm-dd', date)
+			if ($.inArray(sdate, enableDays) != -1) {
+				return [true];
+			}
+			return [false];
+		},
+		monthNames: ["জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"],
+		dayNamesMin: ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি"]
 	});
-
-	$("#Datepicker1").datepicker("option", $.datepicker.regional['bn']);
 
 	$("#Datepicker1").on("change", function () {
 		var archive_date = $(this).val();
@@ -34,6 +36,7 @@ jQuery(document).ready(function () {
 		}
 	});
 
+	// datepicker hide control
 	$(document).on('click', (e) => {
 		const p = $(e.target).closest('div#Datepicker1');
 		const p2 = $(e.target).closest('div.datepicker_wrapper');
@@ -43,10 +46,6 @@ jQuery(document).ready(function () {
 				$('#Datepicker1').hide();
 			}
 		}
-	});
-
-	$("#Datepicker1 span").each((i, e) => {
-		// console.log(e);
 	});
 
 	/*#############################
@@ -82,6 +81,17 @@ jQuery(document).ready(function () {
 	}
 	if (site_url_name == 'Home') {
 		localStorage.removeItem('date');
+	}
+
+	function translate() {
+		document.getElementById("news_date").innerText = bn.date(document.getElementById("news_date").innerText, 'YYYY-MM-DD', 'DD-MM-YYYY');
+		setTimeout(() => {
+			$('.ui-datepicker-year').text(bn.bn($('.ui-datepicker-year').text()));
+			// $('.ui-datepicker-calendar tr td a, .ui-datepicker-calendar tr td span').each(function () {
+			// 	const text = $(this).text();
+			// 	$(this).text(bn.bn(text));
+			// });
+		}, 500);
 	}
 
 	function loadImage(image_url) {
@@ -232,6 +242,7 @@ jQuery(document).ready(function () {
 		$('#' + id).hide();
 	}
 
+	translate();
 	stickyHeader();
 	// pagesUlBelow();
 

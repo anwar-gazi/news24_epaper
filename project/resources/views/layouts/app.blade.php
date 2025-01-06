@@ -90,52 +90,78 @@
         <div class="header-div">
             <header id="header_non-sticky" class="header-div non-sticky" style="box-shadow: 0 3px 5px #eee">
                 <div class="container-fluid d-flex justify-content-between align-items-center py-2">
-                    <a href="{{ url('/') }}" class="d-flex align-items-center">
-                      <img id="main_logo" src="{{ $logoSrc }}" alt="Logo" style="max-width: 300px">
-                    </a>
+
+                    <div>
+                        <a href="{{ url('/') }}" class="d-flex align-items-center">
+                        <img id="main_logo" src="{{ $logoSrc }}" alt="Logo" style="max-width: 300px">
+                        </a>
+                    </div>
                   
-                    <nav class="ms-auto d-none d-lg-flex">  <ul class="nav list-unstyled mb-0">
-                        <li class="nav-item">
-                          <a href="<?php echo $epaper_het->online; ?>" target="_blank" class="nav-link">
-                            <img height="20" alt="Site symbol logo" class="me-2" src="{{ $logoIconSrc }}" style="vertical-align: sub"> অনলাইন
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a href="#" target="_blank" class="nav-link">
-                            <i class="fa-sharp fa-solid fa-table-list"></i> আজকের পত্রিকা
-                          </a>
-                        </li>
-                        <li class="nav-item">
-                          <a href="#" target="_blank" class="nav-link">
-                            <img width="16" src="https://kalbela.com/assets/verified_icon/archive.png" class="me-2" alt="archive"> আর্কাইভ
-                          </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa-solid fa-thumbs-up me-2"></i> সোশ্যাল মিডিয়া
-                          </a>
-                          <ul class="dropdown-menu megamenu shadow"> <li>
-                              <a href="<?php echo $epaper_het->facebook; ?>" target="_blank" class="d-flex align-items-center">
-                                <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
-                                <span class="ms-2">ফেসবুক</span>
-                              </a>
+                    <div>
+                        <nav class="ms-auto d-none d-lg-flex">  <ul class="nav list-unstyled mb-0">
+                            <li class="nav-item">
+                            <a href="<?php echo $epaper_het->online; ?>" target="_blank" class="nav-link">
+                                <img height="20" alt="Site symbol logo" class="me-2" src="{{ $logoIconSrc }}" style="vertical-align: sub"> অনলাইন
+                            </a>
                             </li>
-                            <li>
-                              <a href="<?php echo $epaper_het->youtube; ?>" target="_blank" class="d-flex align-items-center">
-                                <i class="fa-brands fa-youtube" aria-hidden="true"></i>
-                                <span class="ms-2">ইউটিউব</span>
-                              </a>
+                            <li class="nav-item">
+                            <a href="#" target="_blank" class="nav-link">
+                                <i class="fa-sharp fa-solid fa-table-list"></i> আজকের পত্রিকা
+                            </a>
                             </li>
-                            <li>
-                              <a href="{{ $epaper_het->twitter ? $epaper_het->twitter : "#" }}" target="_blank" class="d-flex align-items-center">
-                                <i class="fa-brands fa-twitter" aria-hidden="true"></i>
-                                <span class="ms-2">টুইটার</span>
-                              </a>
+                            <li class="nav-item">
+                            <a href="#" target="_blank" class="nav-link">
+                                <img width="16" src="https://kalbela.com/assets/verified_icon/archive.png" class="me-2" alt="archive"> আর্কাইভ
+                            </a>
                             </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </nav>
+                            <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-thumbs-up me-2"></i> সোশ্যাল মিডিয়া
+                            </a>
+                            <ul class="dropdown-menu megamenu shadow"> <li>
+                                <a href="<?php echo $epaper_het->facebook; ?>" target="_blank" class="d-flex align-items-center">
+                                    <i class="fa-brands fa-square-facebook" aria-hidden="true"></i>
+                                    <span class="ms-2">ফেসবুক</span>
+                                </a>
+                                </li>
+                                <li>
+                                <a href="<?php echo $epaper_het->youtube; ?>" target="_blank" class="d-flex align-items-center">
+                                    <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+                                    <span class="ms-2">ইউটিউব</span>
+                                </a>
+                                </li>
+                                <li>
+                                <a href="{{ $epaper_het->twitter ? $epaper_het->twitter : "#" }}" target="_blank" class="d-flex align-items-center">
+                                    <i class="fa-brands fa-twitter" aria-hidden="true"></i>
+                                    <span class="ms-2">টুইটার</span>
+                                </a>
+                                </li>
+                            </ul>
+                            </li>
+                        </ul>
+                        </nav>
+                    </div>
+
+                    <div class="">
+                        <div class="extra-opt">
+                            <span class="dropdown_menu_hover">
+                                <a href="#" id="dropdownSearch" aria-label="Type Here For Search">
+                                    <i class="fa-solid fa-magnifying-glass open_icon" style="color: rgb(0, 0, 0);"></i>
+                                    <i class="fa-solid fa-times close_icon" style="display: none;"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdownSearch p-0" style="display: none;">
+                                    <div class="search_bar">
+                                        <div class="position-relative">
+                                            <span class="search-icon search_button">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </span>
+                                            <input class="form-control form-control-sm srch_keyword" type="text" placeholder="সার্চ করুন.." name="q" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
                   
                     <button class="btn btn-light d-lg-none hidden" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
                       <i class="fa-solid fa-bars"></i>
