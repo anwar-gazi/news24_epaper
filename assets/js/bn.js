@@ -60,3 +60,7 @@ window.bn = {
         return transposeObject(this.char_map)[char];
     }
 };
+
+window.rtrimForwardSlash = (str) => {
+    return str.replace(/\/+$/, '');
+};

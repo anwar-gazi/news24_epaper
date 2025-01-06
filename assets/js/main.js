@@ -1,5 +1,16 @@
 jQuery(document).ready(function () {
 
+	(function() {
+		const home_url = rtrimForwardSlash($('a#home_url').attr('href'));
+		$('#search_input').keypress(function(event) {
+			if (event.which === 13 && event.target.value.trim()) {
+				const needle = encodeURIComponent(event.target.value);
+				const url = home_url + "?q=" + needle;
+				window.location = url;
+			}
+		});
+	})();
+
 	const enableDays = $('#Datepicker1').data('publisheddates');
 	// function enableAllTheseDays(date) {
 	// 	var sdate = $.datepicker.formatDate('yy-mm-dd', date)
@@ -81,6 +92,13 @@ jQuery(document).ready(function () {
 	}
 	if (site_url_name == 'Home') {
 		localStorage.removeItem('date');
+	}
+
+	function exec(callbacks = []) {
+		callbacks.forEach(callback => {
+			console.log(callbacks);
+			callback();
+		});
 	}
 
 	function translate() {
@@ -236,10 +254,20 @@ jQuery(document).ready(function () {
 	}
 
 	function show(id) {
-		$('#' + id).show();
+		if (id.startsWith(".") || id.startsWith("#")) {
+			var selector = id;
+		} else {
+			var selector = '#' + id;
+		}
+		$(selector).show();
 	}
 	function hide(id) {
-		$('#' + id).hide();
+		if (id.startsWith(".") || id.startsWith("#")) {
+			var selector = id;
+		} else {
+			var selector = '#' + id;
+		}
+		$(selector).hide();
 	}
 
 	translate();
@@ -252,6 +280,7 @@ jQuery(document).ready(function () {
 	window.printPage = printPage;
 	window.show = show;
 	window.hide = hide;
+	window.exec = exec;
 });
 
 /*==============javascript=====================*/

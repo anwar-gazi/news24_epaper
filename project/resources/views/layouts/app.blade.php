@@ -92,16 +92,16 @@
                 <div class="container-fluid d-flex justify-content-between align-items-center py-2">
 
                     <div>
-                        <a href="{{ url('/') }}" class="d-flex align-items-center">
+                        <a id="home_url" href="{{ url('/') }}" class="d-flex align-items-center">
                         <img id="main_logo" src="{{ $logoSrc }}" alt="Logo" style="max-width: 300px">
                         </a>
                     </div>
                   
-                    <div>
+                    <div style="padding-right: 10%">
                         <nav class="ms-auto d-none d-lg-flex">  <ul class="nav list-unstyled mb-0">
                             <li class="nav-item">
-                            <a href="<?php echo $epaper_het->online; ?>" target="_blank" class="nav-link">
-                                <img height="20" alt="Site symbol logo" class="me-2" src="{{ $logoIconSrc }}" style="vertical-align: sub"> অনলাইন
+                            <a href="<?php echo $epaper_het->online; ?>" target="_blank" class="nav-link" style="color: #cd0000;">
+                                <img height="20" alt="Site symbol logo" class="me-2" src="{{ $logoIconSrc }}" style="vertical-align: sub;"> অনলাইন
                             </a>
                             </li>
                             <li class="nav-item">
@@ -143,23 +143,27 @@
                     </div>
 
                     <div class="">
-                        <div class="extra-opt">
-                            <span class="dropdown_menu_hover">
+                        <div style="position: absolute;">
+                            <script async src="https://cse.google.com/cse.js?cx=a5087d58341484682"></script>
+                            <div class="gcse-searchresults-only"></div>
+                        </div>
+                        <div class="extra-opt relative">
+                            <div class="dropdown_menu_hover">
                                 <a href="#" id="dropdownSearch" aria-label="Type Here For Search">
-                                    <i class="fa-solid fa-magnifying-glass open_icon" style="color: rgb(0, 0, 0);"></i>
-                                    <i class="fa-solid fa-times close_icon" style="display: none;"></i>
+                                    <i class="fa-solid fa-magnifying-glass open_icon" style="color: rgb(0, 0, 0);" onclick="[show('.dropdownSearch'), show('#dropdownSearch .close_icon'), hide('#dropdownSearch .open_icon')]"></i>
+                                    <i class="fa-solid fa-times close_icon" style="display: none;" onclick="[hide('.dropdownSearch'), hide('#dropdownSearch .close_icon'), show('#dropdownSearch .open_icon')]"></i>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdownSearch p-0" style="display: none;">
-                                    <div class="search_bar">
-                                        <div class="position-relative">
-                                            <span class="search-icon search_button">
-                                                <i class="fa-solid fa-magnifying-glass"></i>
-                                            </span>
-                                            <input class="form-control form-control-sm srch_keyword" type="text" placeholder="সার্চ করুন.." name="q" value="">
-                                        </div>
+                            </div>
+                            <div class="hidden news_searchbar dropdown-menu-end dropdownSearch p-0" style="display: none;">
+                                <div class="search_bar">
+                                    <div class="relative">
+                                        <span class="search-icon search_button">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </span>
+                                        <input id="search_input" class="form-control form-control-sm srch_keyword" type="text" placeholder="সার্চ করুন.." name="q" value="">
                                     </div>
                                 </div>
-                            </span>
+                            </div>
                         </div>
                     </div>
                   
