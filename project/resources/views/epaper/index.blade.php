@@ -103,10 +103,11 @@
                             @php
                                 $related_item = \App\Epaper::GetRelatedItem($date, $article->related_image_id);
                                 $get_image_width = \App\Epaper::GetImageSize($image_location . $article->image);
+                                $featured_class = $article->featured? 'featured':'';
                             @endphp
 
                             <area shape="rect" coords="{{ $article->coords }}" data-image="{{ $article->image }}"
-                                class="main-img"
+                                class="main-img {{ $article->featured? 'featured':'' }}"
                                 onclick="modalOpen('<?php echo $article->image; ?>','<?php echo $image_location; ?>','<?php echo $related_item; ?>','<?php echo $get_image_width; ?>')" />
                         @endforeach
                     @endif

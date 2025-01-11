@@ -111,6 +111,7 @@ Route::group(['middleware' => 'auth'], function() {
 	## Images Module
 	##########################
 	##MapImage
+	Route::post('/{date}/set_featured_image', 'ImageController@set_featured_image');
 	Route::get('/{date}/image-mapping-{page_id}', 'ImageController@index')->name('Image Mapping');
 	##CropImage
 	Route::post('/image-mapping/crop-image/{page_id}', 'ImageController@cropImage')->name('Crop Image');

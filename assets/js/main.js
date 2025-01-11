@@ -292,6 +292,8 @@ jQuery(document).ready(function () {
 	window.show = show;
 	window.hide = hide;
 	window.exec = exec;
+
+	$('area.featured').click();
 });
 
 /*==============javascript=====================*/

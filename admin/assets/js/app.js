@@ -770,3 +770,27 @@ function _init() {
     });
   };
 }(jQuery));
+
+
+(function($) {
+  function set_featured_image(url, id, checked, csrf_token) {
+    checked = checked ? 1 : 0;
+    $.ajax({
+      type: 'POST',
+      url: url, 
+      data: {id, checked},
+      headers: { 'X-CSRF-TOKEN': csrf_token },
+      success: function(response) {
+      },
+      error: function(error) {
+          console.error(error);
+      }
+    });
+  }
+
+  window.set_featured_image = set_featured_image;
+}(jQuery));
+
+(function($) {
+  
+}(jQuery));

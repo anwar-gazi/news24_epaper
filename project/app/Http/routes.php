@@ -17,7 +17,13 @@ Route::get('/clear-all', function() {
 	$exitCode = Artisan::call('route:clear');
     $exitCode = Artisan::call('cache:clear');
     $exitCode = Artisan::call('config:cache');
+    $exitCode = Artisan::call('news:categories');
     return 'Clear and Config All';
+});
+
+Route::get('/sync', function() {
+    $exitCode = Artisan::call('news:categories');
+    return 'Sync Categories';
 });
 
 

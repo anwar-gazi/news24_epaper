@@ -65,16 +65,14 @@
 				@endphp
 
 				@if(!empty($epaper_articles) && (count($epaper_articles)>0))
-				@foreach($epaper_articles as $key => $article)
+					@foreach($epaper_articles as $key => $article)
+						@php 
+						$related_item = \App\Epaper::GetRelatedItem($date, $article->related_image_id);
+						$get_image_width = \App\Epaper::GetImageSize($image_width_location.$article->image);
+						@endphp
 
-				@php 
-				$related_item = \App\Epaper::GetRelatedItem($date, $article->related_image_id);
-
-				$get_image_width = \App\Epaper::GetImageSize($image_width_location.$article->image);
-				@endphp
-
-				<area shape="rect" coords="{{$article->coords}}" data-image="{{$article->image}}"  class="main-img"  onclick="modalOpen('<?php echo $article->image; ?>','<?php echo $image_location; ?>','<?php echo $related_item; ?>', '<?php echo $get_image_width; ?>', '<?php echo $article->relation; ?>')"/>
-				@endforeach
+						<area shape="rect" coords="{{$article->coords}}" data-image="{{$article->image}}"  class="main-img"  onclick="modalOpen('<?php echo $article->image; ?>','<?php echo $image_location; ?>','<?php echo $related_item; ?>', '<?php echo $get_image_width; ?>', '<?php echo $article->relation; ?>')"/>
+					@endforeach
 				@endif
 			</map>
 

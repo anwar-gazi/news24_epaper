@@ -118,7 +118,8 @@
 <!-- FastClick -->
 <script src="{{asset('assets/plugins/fastclick/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="{{asset('assets/js/app.min.js')}}"></script>
+{{-- <script src="{{asset('assets/js/app.min.js')}}"></script> --}}
+<script src="{{asset('assets/js/app.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('assets/js/demo.js')}}"></script>
 

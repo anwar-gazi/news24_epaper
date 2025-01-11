@@ -3,19 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class ImageController extends Controller
 {
 
+    function set_featured_image($date) {
+        $images_table='images_'.date('Y_m', strtotime($date));
+        $id = request()->input('id');
+        $featured = request()->input('checked') == '1'? 1 : 0;
+        if (!$id) return;
+
+        if (!Schema::hasColumn($images_table, 'featured')) {
+            Schema::table($images_table, function(Blueprint $table) {
+                $table->tinyInteger('featured')->default(0)->after('page_id');
+            });
+        }
+        DB::table($images_table)->where('id', $id)->update(['featured' => $featured]);
+        DB::table($images_table)->where('id', '!=', $id)->update(['featured' => 0]);
+    }
     /**
      * Show the application manage-images.
      *
      * @return \Illuminate\Http\Response
      */
     public function index($date, $page_id)
-    {   
-
+    {
         ## get db table ##
         $pages_table='pages_'.date('Y_m', strtotime($date));
         $edition_pages_table='edition_pages_'.date('Y_m', strtotime($date));

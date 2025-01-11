@@ -153,7 +153,10 @@
 				
 				<div class="box-body" style="padding-top: 0px">
 					@if(!empty($page_info))
-					<form action="{{url('/image-mapping/crop-image',$page_info->page_id)}}" method="post" enctype="multipart/form-data">
+					@php
+						$form_target = url('/image-mapping/crop-image',$page_info->page_id);
+					@endphp
+					<form action="{{ $form_target }}" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="_token" value="{{csrf_token()}}">
 
 						<div class="row" style="position: fixed;z-index: 1000;border-top: 5px solid white;padding: 0px 5px;border-radius: 0px;top: 50px;width: 70%;">
@@ -269,6 +272,7 @@
 					<tr>
 						<th>SL</th>
 						<th>Cropped Image</th>
+						<th>Featured</th>
 						<th>Image ID</th>
 						<th>Relation</th>
 						<th>Select Linked Image</th>
@@ -282,6 +286,12 @@
 						<td style="vertical-align: middle;">{{$key+1}}</td>
 						<td style="vertical-align: middle;">
 							<img src="{{$up_dir.$uploads_path.date('Y',strtotime($page_info->publish_date)).'/'.date('m',strtotime($page_info->publish_date)).'/'.date('d',strtotime($page_info->publish_date)).'/images/'.$images->image}}" class=" image-responsive" style="height: 150px;width: 150px">
+						</td>
+						<td>
+							@php
+								$url = url('/' . $page_info->publish_date . '/set_featured_image/' );
+							@endphp
+							<input class="featured_image" type="checkbox" name="featured" {{ $images->featured==1?"checked":"" }} value="{{ $images->id }}" onclick="[set_featured_image('{{$url}}', '{{$images->id}}', this.checked, '{{ csrf_token() }}' ) ]">
 						</td>
 						<td style="vertical-align: middle;">{{$images->id}}</td>
 						<td style="vertical-align: middle;">{{ucfirst($images->relation)}}</td>
