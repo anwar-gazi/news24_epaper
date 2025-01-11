@@ -22,10 +22,10 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => 'news24_epaper_db',
+            'host' => 'mysql57',
             'port' => '3306',
-            'database' => 'mrnetdoptor_epaper2',
-            'username' => 'mrnetdoptor_epaper2',
+            'database' => 'epaper',
+            'username' => 'news',
             'password' =>'droid273',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
