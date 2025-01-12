@@ -352,7 +352,8 @@
                             </div>
 
                             <div id="news_popup" class="news-popup" style="border: 1px solid #dee2e6!important; height: auto; background-color: white; padding: 10px; padding-bottom: 50px;">
-                                <div id="img1" class="justify-center align-items-center popup-border relative" data-screenshot>
+                                
+                                <div id="img1" class="justify-center align-items-center popup-border relative" data-screenshot style="margin-top: 1rem">
                                     <img src="{{ $logoSrc }}" style="position: absolute; left: 10px; top: -3%; width: 30%; z-index: 10; background-color: white">
                                     <div class="flex" style="padding: 5px">
                                         <div class="" style="margin-right: 0; margin-left: auto"><span class="date-bn" style="padding-left: 5px; border-left: 4px solid #cb262b;"></span></div>
