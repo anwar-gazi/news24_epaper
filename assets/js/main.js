@@ -271,7 +271,12 @@ jQuery(document).ready(function () {
 				document.body.removeChild(a);
 			  });
 		});
-	  }
+	}
+
+	function pagesBarHeight() {
+		const height = $('#paper img').height();
+		document.getElementById('left_bar_pages').style.height = (height+39)+'px';
+	}
 
 	function pagesUlBelow() {
 		$('#sideLeft_pagesUl').prop('outerHTML');
@@ -303,6 +308,7 @@ jQuery(document).ready(function () {
 	stickyHeader();
 	// pagesUlBelow();
 	populate_bn_dates();
+	setTimeout(() => pagesBarHeight(), 200);
 
 	window.watermark = watermark;
 	window.modalOpen = modalOpen;

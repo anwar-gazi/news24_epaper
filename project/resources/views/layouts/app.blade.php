@@ -254,7 +254,7 @@
                     <div class="allPages_left">
                         @if (empty($page_name) && !empty($get_categories) && count($get_categories) > 0)
                             <div class="all-thumb current lg-mb-10 font-12">সকল পাতা</div>
-                            <div style="border: 1px solid #D2D0CE;width: 168px;height: 500px;overflow-y: scroll;">
+                            <div id="left_bar_pages" style="border: 1px solid #D2D0CE;width: 168px;overflow-y: scroll;">
                                 <ul id="sideLeft_pagesUl" style="list-style: unset;padding: 0px;margin: 0px;">
                                     @foreach ($get_categories as $key => $page)
                                         <li style="padding: 10px">
@@ -272,19 +272,21 @@
                             </div>
                         @endif
 
-                        <!-- ad code -->
-                        @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_3'); @endphp
-                        @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
-                            <div class="hidden d-lg-block add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
-                                <?php echo $sidebar_ad_4->ad_code; ?>
-                            </div>
-                        @endif
-                        @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_4'); @endphp
-                        @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
-                            <div class="hidden d-lg-block add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
-                                <?php echo $sidebar_ad_4->ad_code; ?>
-                            </div>
-                        @endif
+                        <div class="hidden">
+                            <!-- ad code -->
+                            @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_3'); @endphp
+                            @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
+                                <div class="hidden d-lg-block add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
+                                    <?php echo $sidebar_ad_4->ad_code; ?>
+                                </div>
+                            @endif
+                            @php $sidebar_ad_4 = \App\Epaper::GetAdvertisement('sidebar_ad_4'); @endphp
+                            @if (!empty($sidebar_ad_4) && !empty($sidebar_ad_4->ad_code) && $sidebar_ad_4->ad_status == '1')
+                                <div class="hidden d-lg-block add text-center" style="margin-top: 10px;padding: 5px;border: 1px solid #c5c5c5">
+                                    <?php echo $sidebar_ad_4->ad_code; ?>
+                                </div>
+                            @endif
+                        </div>
 
                     </div>
 
@@ -318,7 +320,7 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div id="paper">
                             @yield('content')
                         </div>
 
