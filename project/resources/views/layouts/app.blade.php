@@ -252,7 +252,7 @@
                     <!-- left paper div -->
                     <div class="allPages_left">
                         @if (empty($page_name) && !empty($get_categories) && count($get_categories) > 0)
-                            <div class="all-thumb current">সকল পাতা</div>
+                            <div class="all-thumb current lg-mb-10 font-12">সকল পাতা</div>
                             <div style="border: 1px solid #D2D0CE;width: 168px;height: 500px;overflow-y: scroll;">
                                 <ul id="sideLeft_pagesUl" style="list-style: unset;padding: 0px;margin: 0px;">
                                     @foreach ($get_categories as $key => $page)
@@ -289,16 +289,16 @@
 
                     <!-- main paper div -->
                     <div id="content_div" class="relative">
-                        <div id="content_topbar" class="md-py-15">
+                        <div id="content_topbar" class="md-py-15 lg-pb-10">
                             <a class="hidden" href="{{ url('/all/pages/nogor-edition/' . $date) }}"><img src="{{ asset('assets/images/front/all1.png') }}" style="position: absolute; left: 0"></a>
                             <div class="">
-                                <div tabindex="0" class="datepicker_wrapper archive-cal-level text-center relative" onclick="show('Datepicker1')">
-                                    <div class="inline"><i class="fa fa-calendar"></i> <span id="news_date">{{ $date }}</span></div>
+                                <div tabindex="0" class="datepicker_wrapper archive-cal-level text-center relative px-10" onclick="show('Datepicker1')">
+                                    <div class="inline"><i class="fa fa-calendar"></i> <a id="news_date" class="font-12">{{ $date }}</a></div>
                                     <div id="Datepicker1" class="absolute z-1 hidden" data-publishedDates="{{ $publishDates }}"></div>
                                 </div>
                             </div>
-                            <div class="fill">
-                                <div class="pagination lg-float-right" style="margin: 0px;padding: 0px">
+                            <div class="fill flex justify-center">
+                                <div class="pagination lg-float-right font-12 mr-10c" style="margin: 0px;padding: 0px">
                                     <a style="margin-left: 0px;" href="#">&laquo;</a>
                                     @for ($i = 1; $i <= count($pagination_pages); $i++)
                                         <a class="{{ $i==$page_current? 'current' : '' }}" href="{{ url('/nogor-edition/' . $date . '/' . $i) }}" data-translate="1">{{ translateNumber($i) }}</a>
@@ -311,8 +311,7 @@
                                     @php
                                         $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
                                     @endphp
-                                    <button onclick='printPage("{{ $srcImage }}");' style="position: absolute; right: 0">
-                                        <i class="fa fa-print"></i></button>
+                                    <button class="print" onclick='printPage("{{ $srcImage }}");'><i class="fa fa-print"></i></button>
                                     <canvas id="printable" style="display: none;" data-srcImage="{{ $srcImage }}"></canvas>
                                 @endif
                             </div>
@@ -339,9 +338,9 @@
 
                     <div id="img" class="fill-remaining d-md-none">
                         <div class="">
-                            <div class="d-flex">
+                            <div class="d-flex font-12 lg-mb-10">
                                 <div type="button" class="fill full-image-view all-thumb current">ইমেজ ভিউ</div>
-                                <div id="news_img_download" type="button" class="fill all-thumb">ডাউনলোড</div>
+                                <div id="news_img_download" type="button" class="fill all-thumb pointer">ডাউনলোড</div>
                                 <div id="close-popupMobile" type="button" class="fill all-thumb d-lg-none" onclick="closePreview()">বন্ধ করুন</div>
                             </div>
 

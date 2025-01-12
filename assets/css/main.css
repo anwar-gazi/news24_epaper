@@ -947,8 +947,16 @@ div.tab a:focus,
   /* IE6-9 */
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+area {
+  cursor: pointer;
+}
+
 .pagination {
-  display: inline-block;
+  /* display: inline-block; */
   margin-top: 15px;
 }
 
@@ -958,6 +966,7 @@ div.tab a:focus,
   text-decoration: none;
   border: 1px solid #ddd;
   margin: 0 4px;
+  color: inherit;
 }
 
 .pagination a.active {
@@ -1133,7 +1142,13 @@ nav.nav-x a:hover {
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
+  cursor: pointer;
+}
+
+.archive-cal-level a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .text-center {
@@ -1268,10 +1283,33 @@ body.mobile-view .srch_form, .srch_keyword {
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
+button.print {
+  position: absolute; 
+  right: 2px;
+  top: 3.4%;
+  z-index: 10;
+  cursor: progress;
+}
+
+.px-10 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.font-12 {
+  font-size: 1.2em;
+}
+
 .p-0 {
   padding: 0 !important;
 }
 
+.flex {
+  display: flex;
+}
+.justify-center {
+  justify-content: center;
+}
 
 .flex-container, .d-flex {
   display: flex;
@@ -1325,7 +1363,7 @@ body.mobile-view .srch_form, .srch_keyword {
 }
 
 .all-thumb {
-  font-size: 16px;
+  /* font-size: 16px; */
   text-align: center;
   padding: 5px 0;
 }
@@ -1495,6 +1533,10 @@ img {
   cursor: pointer;
 }
 
+.mr-10c {
+  margin-right: 10%;
+}
+
 
 @media (max-width: 768px) {
   .container-fluid {
@@ -1578,5 +1620,13 @@ img {
     float: right;
     text-align: center;
     box-sizing: border-box;
+  }
+
+  .lg-pb-10 {
+    padding-bottom: 10px;
+  }
+
+  .lg-mb-10 {
+    margin-bottom: 10px;
   }
 }
