@@ -40,8 +40,8 @@ jQuery(document).ready(function () {
 			}
 			return [false];
 		},
-		monthNames: ["জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"],
-		dayNamesMin: ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি"]
+		// monthNames: ["জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"],
+		// dayNamesMin: ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি"]
 	});
 
 	$("#Datepicker1").on("change", function () {
@@ -115,7 +115,7 @@ jQuery(document).ready(function () {
 	function translate() {
 		document.getElementById("news_date").innerText = bn.date(document.getElementById("news_date").innerText, 'YYYY-MM-DD', 'DD-MM-YYYY');
 		setTimeout(() => {
-			$('.ui-datepicker-year').text(bn.bn($('.ui-datepicker-year').text()));
+			// $('.ui-datepicker-year').text(bn.bn($('.ui-datepicker-year').text()));
 			// $('.ui-datepicker-calendar tr td a, .ui-datepicker-calendar tr td span').each(function () {
 			// 	const text = $(this).text();
 			// 	$(this).text(bn.bn(text));
@@ -260,7 +260,7 @@ jQuery(document).ready(function () {
 	}
 
 	function convertDivToImage(id) {
-		const screenshotable = $('div#'+id+' [data-screenshot]');
+		const screenshotable = $('div#'+id+' [data-screenshot]:visible');
 		screenshotable.each((i, e) => {
 			html2canvas(e).then(function(canvas) {
 				var a = document.createElement('a');
