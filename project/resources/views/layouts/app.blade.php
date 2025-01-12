@@ -314,14 +314,22 @@
                                     @php
                                         $srcImage = asset('uploads/epaper/' . date('Y', strtotime($home_page->publish_date)) . '/' . date('m', strtotime($home_page->publish_date)) . '/' . date('d', strtotime($home_page->publish_date)) . '/pages/' . $home_page->image);
                                     @endphp
-                                    <button class="print" onclick='printPage("{{ $srcImage }}");'><i class="fa fa-print"></i></button>
+                                    <button class="print" onclick='downloadPage("{{ $srcImage }}");'><i class="fa fa-print"></i></button>
                                     <canvas id="printable" style="display: none;" data-srcImage="{{ $srcImage }}"></canvas>
                                 @endif
                             </div>
                         </div>
 
                         <div id="paper" style="box-shadow: 0px 0px 5px #333; border-radius: 5px;">
-                            @yield('content')
+                            <div style="background-color: white" data-screenshot>
+
+                                @yield('content')
+
+                                <div id="paper_footer" class="relative pb-2 hidden">
+                                    <div class="w-70c ml-auto mr-auto">{{$epaper_het->footer}}</div>
+                                    <div>{{$epaper_het->copyright}}</div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="epaper-page-bar1 mt-4">

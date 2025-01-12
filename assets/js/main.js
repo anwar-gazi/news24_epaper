@@ -132,12 +132,12 @@ jQuery(document).ready(function () {
 		});
 	}
 
-	function watermark(canvasid, target_image_url, watermark_image_url = $('#main_logo').attr("src"), after = (canvas) => { }) {
+	function watermark(c, target_image_url, watermark_image_url = $('#main_logo').attr("src"), after = (canvas) => { }) {
 		Promise.all([
 			loadImage(target_image_url),
 			loadImage(watermark_image_url)
 		]).then(([mainImage, watermarkImage]) => {
-			const canvas = document.getElementById(canvasid);
+			const canvas = (typeof c==='string')? document.getElementById(c):c;
 			const ctx = canvas.getContext('2d');
 
 			canvas.width = mainImage.naturalWidth;
@@ -157,7 +157,7 @@ jQuery(document).ready(function () {
 
 			after(canvas);
 		}).catch(error => {
-			console.error('Error applying watermark');
+			console.error('Error applying watermark: ' + error);
 		});
 	}
 
@@ -233,6 +233,23 @@ jQuery(document).ready(function () {
 
 	function printPage(printPage) {
 		watermark("printable", printPage, $('#main_logo').attr("src"), (canvas) => imagePrinWindow(canvas.toDataURL()));
+	}
+
+	function downloadPage(image) {
+		$('#paper_footer').show();
+		html2canvas($('#paper [data-screenshot]').get(0)).then(function(canvas) {
+			watermark(canvas, canvas.toDataURL(), $('#main_logo').attr("src"), (canvas) => {
+				imagePrinWindow(canvas.toDataURL());
+				return;
+				var a = document.createElement('a');
+				document.body.appendChild(a);
+				a.href = canvas.toDataURL("image/png");
+				a.download = 'niropekkho.png';
+				a.click();
+				document.body.removeChild(a);
+			});
+		});
+		$('#paper_footer').hide();
 	}
 
 	function stickyHeader() {
@@ -315,6 +332,7 @@ jQuery(document).ready(function () {
 	window.modalOpen = modalOpen;
 	window.closePreview = closePreview;
 	window.printPage = printPage;
+	window.downloadPage = downloadPage;
 	window.convertDivToImage = convertDivToImage;
 	window.show = show;
 	window.hide = hide;
