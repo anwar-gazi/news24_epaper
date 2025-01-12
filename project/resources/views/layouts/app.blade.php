@@ -320,7 +320,7 @@
                             </div>
                         </div>
 
-                        <div id="paper">
+                        <div id="paper" style="box-shadow: 0px 0px 5px #333; border-radius: 5px;">
                             @yield('content')
                         </div>
 
