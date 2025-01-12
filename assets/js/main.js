@@ -259,6 +259,20 @@ jQuery(document).ready(function () {
 		observer.observe(nav);
 	}
 
+	function convertDivToImage(id) {
+		const screenshotable = $('div#'+id+' [data-screenshot]');
+		screenshotable.each((i, e) => {
+			html2canvas(e).then(function(canvas) {
+				var a = document.createElement('a');
+				document.body.appendChild(a);
+				a.href = canvas.toDataURL("image/png");
+				a.download = 'niropekkho' + (screenshotable.length>1? '_'+(i+1) : '') + '.png';
+				a.click();
+				document.body.removeChild(a);
+			  });
+		});
+	  }
+
 	function pagesUlBelow() {
 		$('#sideLeft_pagesUl').prop('outerHTML');
 		$('#contentBelow_pagesUl').html($('#sideLeft_pagesUl').prop('outerHTML'));
@@ -294,6 +308,7 @@ jQuery(document).ready(function () {
 	window.modalOpen = modalOpen;
 	window.closePreview = closePreview;
 	window.printPage = printPage;
+	window.convertDivToImage = convertDivToImage;
 	window.show = show;
 	window.hide = hide;
 	window.exec = exec;

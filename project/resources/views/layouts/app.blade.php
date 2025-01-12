@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/jquery-ui/jquery-ui.css') }}">
     <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.js') }}"></script>
     <script src="{{ asset('assets/js/moment-with-locales.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style type="text/css">
         .ui-datepicker-inline {
             width: auto !important;
@@ -340,12 +341,12 @@
                         <div class="">
                             <div class="d-flex font-12 lg-mb-10">
                                 <div type="button" class="fill full-image-view all-thumb current">ইমেজ ভিউ</div>
-                                <div id="news_img_download" type="button" class="fill all-thumb pointer">ডাউনলোড</div>
+                                <div id="news_img_download" type="button" class="fill all-thumb pointer" onclick="[convertDivToImage('news_popup')]">ডাউনলোড</div>
                                 <div id="close-popupMobile" type="button" class="fill all-thumb d-lg-none" onclick="closePreview()">বন্ধ করুন</div>
                             </div>
 
-                            <div class="news-popup" style="border: 1px solid #dee2e6!important; height: auto; background-color: white; padding: 10px; padding-bottom: 50px;">
-                                <div id="img1" class="justify-center align-items-center popup-border relative">
+                            <div id="news_popup" class="news-popup" style="border: 1px solid #dee2e6!important; height: auto; background-color: white; padding: 10px; padding-bottom: 50px;">
+                                <div id="img1" class="justify-center align-items-center popup-border relative" data-screenshot>
                                     <img src="{{ $logoSrc }}" style="position: absolute; left: 10px; top: -3%; width: 30%; z-index: 10; background-color: white">
                                     <div class="flex" style="padding: 5px">
                                         <div class="" style="margin-right: 0; margin-left: auto"><span class="date-bn" style="padding-left: 5px; border-left: 4px solid #cb262b;"></span></div>
@@ -362,7 +363,7 @@
                                         <div>{{$epaper_het->copyright}}</div>
                                     </div>
                                 </div>
-                                <div id="img2" class="mt-3r justify-center align-items-center popup-border relative">
+                                <div id="img2" class="mt-3r justify-center align-items-center popup-border relative" data-screenshot>
                                     <img src="{{ $logoSrc }}" style="position: absolute; left: 10px; top: -1%; width: 30%; z-index: 10; background-color: white">
                                     <div class="flex" style="padding: 5px">
                                         <div class="" style="margin-right: 0; margin-left: auto"><span class="date-bn" style="padding-left: 5px; border-left: 4px solid #cb262b;"></span></div>

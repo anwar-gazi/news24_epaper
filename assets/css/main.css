@@ -1406,7 +1406,7 @@ button.print {
 }
 
 .current {
-  color: #fff;
+  color: #fff !important;
   background: #1a73e8;
 }
 
