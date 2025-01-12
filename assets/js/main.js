@@ -236,7 +236,7 @@ jQuery(document).ready(function () {
 	}
 
 	function stickyHeader() {
-		const timenow = moment().format('DD MMMM YYYY');
+		const timenow = moment($('#news_date').text()).format('DD MMMM YYYY');
 		$('#today_date').text(timenow);
 		$('.sticky-categories-nav').html($('div.categories-nav nav').prop('outerHTML'));
 
@@ -264,6 +264,10 @@ jQuery(document).ready(function () {
 		$('#contentBelow_pagesUl').html($('#sideLeft_pagesUl').prop('outerHTML'));
 	}
 
+	function populate_bn_dates() {
+		$('div.news-popup .date-bn').text(moment($('#news_date').text()).format('dddd DD MMMM YYYY'));
+	}
+
 	function show(id) {
 		if (id.startsWith(".") || id.startsWith("#")) {
 			var selector = id;
@@ -284,6 +288,7 @@ jQuery(document).ready(function () {
 	translate();
 	stickyHeader();
 	// pagesUlBelow();
+	populate_bn_dates();
 
 	window.watermark = watermark;
 	window.modalOpen = modalOpen;
@@ -294,6 +299,8 @@ jQuery(document).ready(function () {
 	window.exec = exec;
 
 	$('area.featured').click();
+
+
 });
 
 /*==============javascript=====================*/

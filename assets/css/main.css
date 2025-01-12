@@ -947,6 +947,16 @@ div.tab a:focus,
   /* IE6-9 */
 }
 
+.border1 {
+  border: 1px solid #dee2e6 !important;
+  margin: 0px 30px 15px 30px;
+}
+
+.popup-border {
+  border: 3px solid #808080;
+  border-radius: 10px;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -1291,6 +1301,30 @@ button.print {
   cursor: progress;
 }
 
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+         -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Standard syntax */
+}
+
+.mt-3r {
+  margin-top: 3rem;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+.ml-auto {
+  margin-left: auto;
+}
+
+.w-70c {
+  width: 70%;
+}
+
 .px-10 {
   padding-left: 10px;
   padding-right: 10px;
@@ -1309,6 +1343,9 @@ button.print {
 }
 .justify-center {
   justify-content: center;
+}
+.align-items-center {
+  align-items: center;
 }
 
 .flex-container, .d-flex {
@@ -1466,6 +1503,9 @@ button.print {
 
 .pb-2, .py-2 {
   padding-bottom: .5rem !important;
+}
+.pb-4 {
+  padding-bottom: 1rem;;
 }
 .pt-2, .py-2 {
   padding-top: .5rem !important;
