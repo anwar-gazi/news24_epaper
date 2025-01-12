@@ -236,7 +236,7 @@
                 @php $epaper_header_top_ad = \App\Epaper::GetAdvertisement('modal_top'); @endphp
                 @if (!empty($epaper_header_top_ad) && !empty($epaper_header_top_ad->ad_code) && $epaper_header_top_ad->ad_status == '1')
                     <div class="add text-center hidden d-lg-block"
-                        style="margin-bottom: 20px;padding: 15px 10px 15px 10px">
+                        style="margin-bottom: 0px;padding: 15px 10px 15px 10px">
                         <?php echo $epaper_header_top_ad->ad_code; ?>
                     </div>
                 @endif

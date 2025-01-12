@@ -275,7 +275,8 @@ jQuery(document).ready(function () {
 
 	function pagesBarHeight() {
 		const height = $('#paper img').height();
-		document.getElementById('left_bar_pages').style.height = (height+39)+'px';
+		const paddedHeight = height + 39;
+		document.getElementById('left_bar_pages').style.height = paddedHeight+'px';
 	}
 
 	function pagesUlBelow() {
