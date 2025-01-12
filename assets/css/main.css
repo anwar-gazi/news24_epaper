@@ -1321,6 +1321,10 @@ button.print {
   margin-left: auto;
 }
 
+.ml-10x {
+  margin-left: 10px;
+}
+
 .w-70c {
   width: 70%;
 }

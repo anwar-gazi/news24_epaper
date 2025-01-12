@@ -339,7 +339,7 @@
                     <!-- end search result not found messages -->
 
 
-                    <div id="img" class="fill-remaining d-md-none no-select">
+                    <div id="img" class="fill-remaining d-md-none no-select ml-10x">
                         <div class="">
                             <div class="d-flex font-12 lg-mb-10">
                                 <div type="button" class="fill full-image-view all-thumb current">ইমেজ ভিউ</div>
