@@ -325,8 +325,12 @@
                         </div>
 
                         <div class="epaper-page-bar1 mt-4">
-                            <a href="{{ url('/nogor-edition/' . $date . '/' . $page_prev) }}" class="e-previous e-previous-page e-but mr-3 e-previous-clse"><i class="fa fa-angle-left d-lg-block"></i></a>
-                            <a href="{{ url('/nogor-edition/' . $date . '/' . $page_next) }}" class="e-next e-but"><i class="fa fa-angle-right d-lg-block"></i></a>
+                            @if ($page_current != 1)
+                                <a href="{{ url('/nogor-edition/' . $date . '/' . $page_prev) }}" class="e-previous e-previous-page e-but mr-3 e-previous-clse"><i class="fa fa-angle-left d-lg-block"></i></a>
+                            @endif
+                            @if ($page_current != $page_last)
+                                <a href="{{ url('/nogor-edition/' . $date . '/' . $page_next) }}" class="e-next e-but"><i class="fa fa-angle-right d-lg-block"></i></a>
+                            @endif
                         </div>
                     </div>
 
