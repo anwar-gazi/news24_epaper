@@ -196,7 +196,7 @@
 
 
                 <div style="border-top: 1px solid #ccc;">
-                    <div class="add text-center categories-nav container-fluid scrollmenu" style="padding: 20px 0; ">
+                    <div class="add text-center categories-nav container-fluid scrollmenu" style="padding: 20px 10rem; ">
                         <nav class="nav-x ">
                             <ul class="d-flex">
                                 <li><a href="{{ url('/') }}" aria-label="Latest News"><i class="fa-solid fa-house"></i></a></li>
