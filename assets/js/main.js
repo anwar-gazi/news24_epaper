@@ -292,7 +292,7 @@ jQuery(document).ready(function () {
 
 	function pagesBarHeight() {
 		const height = $('#paper img').height();
-		const paddedHeight = height + 39;
+		const paddedHeight = Math.max(950, height + 39);
 		document.getElementById('left_bar_pages').style.height = paddedHeight+'px';
 	}
 
