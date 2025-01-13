@@ -253,7 +253,8 @@ jQuery(document).ready(function () {
 	}
 
 	function stickyHeader() {
-		const timenow = moment($('#news_date').text()).format('DD MMMM YYYY');
+		const currentNewsDate = $(".current_date").val();
+		const timenow = moment(currentNewsDate).format('DD MMMM YYYY');
 		$('#today_date').text(timenow);
 		$('.sticky-categories-nav').html($('div.categories-nav nav').prop('outerHTML'));
 
@@ -302,7 +303,8 @@ jQuery(document).ready(function () {
 	}
 
 	function populate_bn_dates() {
-		$('div.news-popup .date-bn').text(moment($('#news_date').text()).format('dddd DD MMMM YYYY'));
+		const currentNewsDate = $(".current_date").val();
+		$('div.news-popup .date-bn').text(moment(currentNewsDate).format('dddd DD MMMM YYYY'));
 	}
 
 	function show(id) {
