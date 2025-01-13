@@ -161,6 +161,8 @@ class PageController extends Controller
     		}catch(\Exception $e){
     			\DB::rollback();
 
+				throw $e;
+
     			if (file_exists($directory_pages.'/'.$image_name)) {
     				unlink($directory_pages.'/'.$image_name);
     			}
