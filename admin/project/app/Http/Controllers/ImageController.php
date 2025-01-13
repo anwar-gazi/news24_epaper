@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,10 +19,16 @@ class ImageController extends Controller
         $featured = request()->input('checked') == '1'? 1 : 0;
         if (!$id) return;
 
-        if (!Schema::hasColumn($images_table, 'featured')) {
-            Schema::table($images_table, function(Blueprint $table) {
-                $table->tinyInteger('featured')->default(0)->after('page_id');
-            });
+        try {
+            if (!Schema::hasColumn($images_table, 'featured')) {
+                Schema::table($images_table, function(Blueprint $table) {
+                    $table->tinyInteger('featured')->default(0)->after('page_id');
+                });
+            }
+        } catch (QueryException $e) {
+            if (strpos($e->getMessage(), 'Column already exists') !== false) {
+                
+            }
         }
         DB::table($images_table)->where('id', $id)->update(['featured' => $featured]);
         DB::table($images_table)->where('id', '!=', $id)->update(['featured' => 0]);
