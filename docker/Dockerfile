@@ -12,10 +12,30 @@ RUN apt-get install -y --allow-unauthenticated \
     zlib1g-dev \
     libpng-dev \
     libfreetype6-dev \
-    libjpeg62-turbo-dev
+    libjpeg62-turbo-dev \
+    \
+    curl \
+    # libpng-dev \
+    # libjpeg-dev \
+    # libfreetype6-dev \
+    # libjpeg62-turbo-dev \
+    # libmcrypt-dev \
+    # libgd-dev \
+    # jpegoptim optipng pngquant gifsicle \
+    # libonig-dev \
+    # libxml2-dev \
+    zip \
+    unzip
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    
+RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg && \
     docker-php-ext-install -j$(nproc) mysql pdo_mysql opcache zip curl mbstring gd
+
+
+RUN apt-get install -y libmagickwand-dev
+RUN pecl install imagick
+RUN docker-php-ext-enable imagick
+
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
