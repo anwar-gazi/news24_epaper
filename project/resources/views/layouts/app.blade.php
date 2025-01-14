@@ -158,7 +158,7 @@
                         </nav>
                     </div>
 
-                    <div class="">
+                    <div class="md-none">
                         <div style="position: absolute;">
                             <script async src="https://cse.google.com/cse.js?cx=a5087d58341484682"></script>
                             <div class="gcse-searchresults-only"></div>
@@ -182,6 +182,12 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="lg-none mr-3">
+                        <button onclick="[show('#right-navbar'), document.getElementById('main-container').classList.toggle('blur')]" id="nav-y-toggle" class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
                   </div>
 
 
@@ -196,7 +202,7 @@
 
 
                 <div style="border-top: 1px solid #ccc;">
-                    <div class="add text-center categories-nav container-fluid scrollmenu" style="padding: 20px 10rem; ">
+                    <div class="add text-center categories-nav container-fluid scrollmenu nav-x-padding" >
                         <nav class="nav-x ">
                             <ul class="d-flex">
                                 <li><a href="{{ url('/') }}" aria-label="Latest News"><i class="fa-solid fa-house"></i></a></li>
@@ -206,7 +212,7 @@
                                 @foreach($categories_nav as $cat)
                                     <li><a href="{{ $cat['url'] }}" title="{{ $cat['label'] }}">{{ $cat['label'] }}</a></li>
                                 @endforeach
-                                <li>
+                                <li class="md-none">
                                     <button onclick="[show('#right-navbar'), document.getElementById('main-container').classList.toggle('blur')]" id="nav-y-toggle" class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
                                         <i class="fa-solid fa-bars"></i>
                                     </button>
@@ -499,14 +505,14 @@
                     <div style="width: 100%;" class="footer_texts">
                         <table style="width: 100%">
                             <tr>
-                                <td width="40%"><a href="{{ url('/') }}">
+                                <td class="md-none" width="40%"><a href="{{ url('/') }}">
                                         <p class="footerLogo" style="padding-left: 10px">
                                             <img src="{{ asset('admin/assets/images/logo/') }}/<?php echo $epaper_het->logo; ?>"
                                                 style="width: 250px">
                                         </p>
                                     </a>
                                 </td>
-                                <td width="10%">
+                                <td class="md-none" width="10%">
                                     <div style="text-align: center !important;padding-left: 10px">
 
                                     </div>
@@ -521,13 +527,9 @@
                         </table>
                     </div>
 
-                    <p
-                        style="font-size: 14px;color:black;border-top:1px solid #636363;margin-top: 1px;margin-bottom: 2px;padding-left: 0px">
-                        <span style="white-space: pre-line; float: left"><?php echo $epaper_het->copyright; ?></span>
-
-                        <span style="display: none; white-space: pre-line; float: right">সকল কারিগরী সহযোগিতায় <a
-                                href="https://www.doptor-design.com.bd">Doptor ডিজাইন</a></span>
-                    </p>
+                    <div class="flex justify-center" style="font-size: 0.9em;color:black;border-top:1px solid #636363; margin-top: 1rem;">
+                        <?php echo $epaper_het->copyright; ?>
+                    </div>
 
                 </div>
             </div>

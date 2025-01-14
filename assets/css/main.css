@@ -1017,7 +1017,7 @@ header img.logo {
   right: 0;
   list-style: none;
   height: 100%;
-  width: 15%;
+  width: 20rem;
   background-color: white;
   overflow-y: auto; 
   padding-top: 20px; 
@@ -1605,7 +1605,7 @@ img {
     display: block;
   }
 
-  .d-md-none {
+  .d-md-none, .md-none {
     display: none;
   }
 
@@ -1618,6 +1618,10 @@ img {
   .md-py-15 {
     padding-top: 15px;
     padding-bottom: 15px;
+  }
+
+  .nav-x-padding {
+    padding: 10px 2rem 10px 0.5rem;
   }
 }
 
@@ -1642,7 +1646,7 @@ img {
     display: block;
   }
 
-  .d-lg-none {
+  .d-lg-none, .lg-none {
     display: none;
   }
 
@@ -1672,5 +1676,9 @@ img {
 
   .lg-mb-10 {
     margin-bottom: 10px;
+  }
+
+  .nav-x-padding {
+    padding: 20px 10rem;
   }
 }
