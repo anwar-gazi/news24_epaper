@@ -209,7 +209,7 @@
 					
 					@endphp
 
-					<center>
+					<div style="display: flex; justify-content: center">
 						<div style="position: relative;">
 							<img src="{{asset($map_image_directory)}}" class="img image-responsive image-mapper-img" style="padding:0;margin: 0;" id="jcrop_target">
 
@@ -238,7 +238,7 @@
 							@endif
 
 						</div>
-					</center>
+					</div>
 
 				</div>
 				<input type="hidden" name="page_publish_date" value="{{$page_info->publish_date}}">
