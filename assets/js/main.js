@@ -68,6 +68,16 @@ jQuery(document).ready(function () {
 				$('#Datepicker1').hide();
 			}
 		}
+
+		if ($('#right-navbar').is(':visible')) {
+			const isNavToggle = $(e.target).is('#nav-y-toggle, #nav-y-toggle *');
+			const isInsideNavbar = $(e.target).is('#right-navbar, #right-navbar *');
+		
+			if (!isNavToggle && !isInsideNavbar) {
+				hide('#right-navbar');
+				$('#main-container').toggleClass('blur');
+			}
+		}
 	});
 
 	/*#############################
