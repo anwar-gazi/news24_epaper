@@ -19,17 +19,17 @@ class ImageController extends Controller
         $featured = request()->input('checked') == '1'? 1 : 0;
         if (!$id) return;
 
-        try {
-            if (!Schema::hasColumn($images_table, 'featured')) {
-                Schema::table($images_table, function(Blueprint $table) {
-                    $table->tinyInteger('featured')->default(0)->after('page_id');
-                });
-            }
-        } catch (QueryException $e) {
-            if (strpos($e->getMessage(), 'Column already exists') !== false) {
+        // try {
+        //     if (!Schema::hasColumn($images_table, 'featured')) {
+        //         Schema::table($images_table, function(Blueprint $table) {
+        //             $table->tinyInteger('featured')->default(0)->after('page_id');
+        //         });
+        //     }
+        // } catch (QueryException $e) {
+        //     if (strpos($e->getMessage(), 'Column already exists') !== false) {
                 
-            }
-        }
+        //     }
+        // }
         DB::table($images_table)->where('id', $id)->update(['featured' => $featured]);
         DB::table($images_table)->where('id', '!=', $id)->update(['featured' => 0]);
     }

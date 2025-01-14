@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use DatabaseTransactions;
+use Illuminate\Database\QueryException;
+use Illuminate\Database\Schema\Blueprint;
 use Schema;
 
 class PageController extends Controller
@@ -133,6 +135,18 @@ class PageController extends Controller
     			}
     			if(!Schema::hasTable($images_table)){
     				\DB::statement('CREATE TABLE '.$images_table.' LIKE '.$last_images_table);
+
+					try {
+						if (!Schema::hasColumn($images_table, 'featured')) {
+							Schema::table($images_table, function(Blueprint $table) {
+								$table->tinyInteger('featured')->default(0)->after('page_id');
+							});
+						}
+					} catch (QueryException $e) {
+						if (strpos($e->getMessage(), 'Column already exists') !== false) {
+							
+						}
+					}
     			}
 
 
