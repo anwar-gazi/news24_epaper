@@ -17,21 +17,22 @@ class ImageController extends Controller
         $images_table='images_'.date('Y_m', strtotime($date));
         $id = request()->input('id');
         $featured = request()->input('checked') == '1'? 1 : 0;
+        $uncheck = request()->input('uncheck');
         if (!$id) return;
 
-        // try {
-        //     if (!Schema::hasColumn($images_table, 'featured')) {
-        //         Schema::table($images_table, function(Blueprint $table) {
-        //             $table->tinyInteger('featured')->default(0)->after('page_id');
-        //         });
-        //     }
-        // } catch (QueryException $e) {
-        //     if (strpos($e->getMessage(), 'Column already exists') !== false) {
+        try {
+            if (!Schema::hasColumn($images_table, 'featured')) {
+                Schema::table($images_table, function(Blueprint $table) {
+                    $table->tinyInteger('featured')->default(0)->after('page_id');
+                });
+            }
+        } catch (QueryException $e) {
+            if (strpos($e->getMessage(), 'Column already exists') !== false) {
                 
-        //     }
-        // }
+            }
+        }
         DB::table($images_table)->where('id', $id)->update(['featured' => $featured]);
-        DB::table($images_table)->where('id', '!=', $id)->update(['featured' => 0]);
+        // DB::table($images_table)->where('id', '!=', $id)->update(['featured' => 0]);
     }
     /**
      * Show the application manage-images.

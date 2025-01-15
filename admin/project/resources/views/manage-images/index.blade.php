@@ -291,7 +291,8 @@
 							@php
 								$url = url('/' . $page_info->publish_date . '/set_featured_image/' );
 							@endphp
-							<input class="featured_image" type="checkbox" name="featured" {{ $images->featured==1?"checked":"" }} value="{{ $images->id }}" onclick="[set_featured_image('{{$url}}', '{{$images->id}}', this.checked, '{{ csrf_token() }}' ) ]">
+							<input class="featured_image" type="checkbox" name="featured" {{ $images->featured==1?"checked":"" }} value="{{ $images->id }}" 
+							onclick="[set_featured_image('{{$url}}', '{{$images->id}}', this.checked, '{{ csrf_token() }}' ) ]">
 						</td>
 						<td style="vertical-align: middle;">{{$images->id}}</td>
 						<td style="vertical-align: middle;">{{ucfirst($images->relation)}}</td>

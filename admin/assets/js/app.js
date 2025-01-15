@@ -774,11 +774,17 @@ function _init() {
 
 (function($) {
   function set_featured_image(url, id, checked, csrf_token) {
+    const uncheck = $('input.featured_image:checked').not(`[value="${id}"]`).map((i,e) => e.value).get();
+    if (uncheck.length) {
+      alert("Uncheck other featured images");
+      window.location.href = window.location.href;
+      return false;
+    }
     checked = checked ? 1 : 0;
     $.ajax({
       type: 'POST',
       url: url, 
-      data: {id, checked},
+      data: {id, checked, uncheck},
       headers: { 'X-CSRF-TOKEN': csrf_token },
       success: function(response) {
       },
